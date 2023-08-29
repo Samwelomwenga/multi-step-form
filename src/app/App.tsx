@@ -1,10 +1,12 @@
-import {Button,Typography} from '@mui/material'
+// import {NextButton,BackButton}from '../componets/Button.tsx'
+import Header from '../features/header/Header'
 function App() {
 
   return (
     <>
-    <Typography component='h1' variant='h4'>hello</Typography>
-    <Button variant="contained" color='error'>click</Button>
+{/* <NextButton/> */}
+{/* <BackButton/> */}
+<Header/>
     </>
   )
 }
