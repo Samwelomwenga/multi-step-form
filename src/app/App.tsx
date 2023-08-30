@@ -1,12 +1,13 @@
-// import {NextButton,BackButton}from '../componets/Button.tsx'
-import Header from '../features/header/Header'
+import {CssBaseline} from '@mui/material'
+import PersonalInfo from '../features/personalInfo/personalInfo'
 function App() {
 
   return (
     <>
+    <CssBaseline/>
 {/* <NextButton/> */}
 {/* <BackButton/> */}
-<Header/>
+<PersonalInfo/>
     </>
   )
 }
