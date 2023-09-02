@@ -13,8 +13,14 @@ import ProIcon from "../../assets/images/icon-pro.svg";
 
 import Header from "../header/Header";
 import { BackButton,NextButton } from "../../componets/Button";
-const SelectPlan = () => {
-  const plans = [
+import React from "react";
+
+interface plansInterface {
+  name:"Arcade"|"Advance"|"Pro"
+  image:string
+}
+const SelectPlan:React.FC = () => {
+  const plans:plansInterface[] = [
     {
       name: "Arcade",
       image: ArcadeIcon,
@@ -31,22 +37,24 @@ const SelectPlan = () => {
   return (
     <Stack component="main"  direction={{md:"row"}}sx={{bgcolor:'grey'}}>
       <Header />
-      <Stack component="section" sx={{bgcolor:"white", marginX:'auto',px:"1.5rem",borderRadius:"3%",width:'100%'}}>
-        <Typography component="h2" variant="h5">
+      <Stack component="section" sx={{bgcolor:"white", marginX:'auto',px:"1.5rem",borderRadius:"3%",width:{
+        md:'100%'
+      }}}>
+        <Typography component="h2" variant="h5"  sx={{pt:'1.5rem'}}>
           Select your plan
         </Typography>
-        <Typography component="p" variant="body2">
+        <Typography component="p" variant="body2" sx={{py:'1rem'}}>
           You have the option of monthly or yearly billing
         </Typography>
         <form noValidate autoComplete="off">
-          <RadioGroup>
+          <RadioGroup  sx={{gap:"1rem",alignItems:"center",mb:"1.3rem"}}>
             {plans.map((plan) => (
-              <FormControlLabel
+              <FormControlLabel key={plan.name}  sx={{border:"2px solid grey",p:".5rem", ml:".1rem",borderRadius:".3rem",width:"100%"}}
                 label={
                   <Stack>
-                    <Typography>{plan.name}</Typography>
-                    <Typography>$90/Yr</Typography>
-                    <Typography>2 months free</Typography>
+                    <Typography component='p' variant="body1">{plan.name}</Typography>
+                    <Typography component='p' variant="body2">$90/Yr</Typography>
+                    <Typography component='p' variant="body2">2 months free</Typography>
                   </Stack>
                 }
                 control={<Radio icon={plan.image} />}
