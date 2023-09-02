@@ -6,7 +6,9 @@ import {
   Checkbox,
 } from "@mui/material";
 import Header from "../header/Header";
+
 import { NextButton, BackButton } from "../../componets/Button";
+
 const PickAddOns: React.FC = () => {
   const addOns = [
     {
@@ -26,7 +28,7 @@ const PickAddOns: React.FC = () => {
     <Stack component="main" direction={{ md: "row" }} sx={{bgcolor:'grey', minHeight:'100vh'}
     }>
       <Header />
-      <Stack component="section" sx={{bgcolor:"white",pl:'2.3rem',marginX:'auto',borderRadius:"3%",ml:{
+      <Stack component="section" sx={{bgcolor:"white",pl:'2.3rem',width:"100%",marginX:'auto',borderRadius:"3%",ml:{
         md:"auto"
       }}}>
         <Typography component="h2" variant="h5" sx={{pt:'1.5rem'}}>
@@ -63,9 +65,9 @@ const PickAddOns: React.FC = () => {
               />
             ))}
           </FormGroup>
-          <Stack direction='row'spacing={-13}>
-            <NextButton />
+          <Stack sx={{display:"flex",flexDirection:"row",justifyContent:"space-between"}}>
             <BackButton />
+            <NextButton />
           </Stack>
         </form>
       </Stack>

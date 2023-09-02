@@ -1,6 +1,7 @@
 import {CssBaseline} from '@mui/material'
 // import PersonalInfo from '../features/personalInfo/PersonalInfo'
-import PickAddOns from '../features/PickAddOns/PickAddOns'
+// import PickAddOns from '../features/PickAddOns/PickAddOns'
+import SelectPlan from '../features/selectPlan/selectPlan'
 function App() {
 
   return (
@@ -9,7 +10,8 @@ function App() {
 {/* <NextButton/> */}
 {/* <BackButton/> */}
 {/* <PersonalInfo/> */}
-<PickAddOns/>
+{/* <PickAddOns/> */}
+<SelectPlan/>
     </>
   )
 }

@@ -2,7 +2,7 @@ import {Button} from '@mui/material'
 // import { useNavigate } from 'react-router-dom'
 export const NextButton:React.FC = () => {
   return (
-    <Button type='button' variant='contained' sx={{right:{xs:'-12.5rem',md:'-32rem'}}}>Next Step</Button>
+    <Button type='button' variant='contained'>Next Step</Button>
   )
 }
 export const BackButton:React.FC=()=>{
