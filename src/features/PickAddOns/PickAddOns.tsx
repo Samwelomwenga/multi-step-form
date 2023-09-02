@@ -23,17 +23,20 @@ const PickAddOns: React.FC = () => {
     },
   ];
   return (
-    <Stack component="main" direction={{ md: "row" }}>
+    <Stack component="main" direction={{ md: "row" }} sx={{bgcolor:'grey', minHeight:'100vh'}
+    }>
       <Header />
-      <Stack component="section">
-        <Typography component="h2" variant="h5">
+      <Stack component="section" sx={{bgcolor:"white",pl:'2.3rem',marginX:'auto',borderRadius:"3%",ml:{
+        md:"auto"
+      }}}>
+        <Typography component="h2" variant="h5" sx={{pt:'1.5rem'}}>
           Pick adds-ons
         </Typography>
-        <Typography component="p" variant="body2">
+        <Typography component="p" variant="body2" sx={{py:'1rem'}}>
           Add-ons help enhance your gaming experience
         </Typography>
         <form autoComplete="off" noValidate>
-          <FormGroup>
+          <FormGroup sx={{marginX:'auto',gap:".5rem"}}>
             {addOns.map((addOn) => (
               <FormControlLabel
                 key={addOn.heading}
@@ -60,7 +63,7 @@ const PickAddOns: React.FC = () => {
               />
             ))}
           </FormGroup>
-          <Stack direction='row'>
+          <Stack direction='row'spacing={-13}>
             <NextButton />
             <BackButton />
           </Stack>
