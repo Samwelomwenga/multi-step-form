@@ -1,37 +1,45 @@
-import {Box,Stepper,Step,StepLabel,useMediaQuery} from '@mui/material'
+import {Box,Stepper,Step,StepLabel,useMediaQuery,Typography} from '@mui/material'
 import sidebarDesktop from '../../assets/images/bg-sidebar-desktop.svg'
 import sidebarMobile from '../../assets/images/bg-sidebar-mobile.svg'
-const Header = () => {
+const Header:React.FC = () => {
     const  isMediumScreen=useMediaQuery('(min-width:960px)');
   return (
-    <Box component="header" sx={{ backgroundRepeat:'no-repeat',height:{md:'100%'},width:'100%', backgroundImage:{
+    <Box component="header" sx={{ backgroundRepeat:'no-repeat',justifyContent:'center',height:{xs:'7.5rem',md:'100vh'},width:'100%', backgroundImage:{
         xs:`url(${sidebarMobile})`,
         md:`url(${sidebarDesktop})`
     } }}>
-<Stepper  activeStep={0} nonLinear orientation={isMediumScreen?'vertical':'horizontal'}
+<Stepper  activeStep={0} nonLinear connector={null} orientation={isMediumScreen?'vertical':'horizontal'} 
 >
     <Step>
-        <StepLabel sx={{visibility:isMediumScreen ?'hidden':'visible'}}>
-            <Box>STEP 1</Box>
-            YOUR INFO
+        <StepLabel>
+        {isMediumScreen?<Box component='div'><Typography component='p' variant='body2'>STEP 1</Typography>
+            <Typography component='p' variant='body2'>YOUR INFO</Typography>
+        </Box>:''}
+            
         </StepLabel>
     </Step>
     <Step>
-        <StepLabel>
-            <Box>STEP 2</Box>
-            SELECT PLAN
+    <StepLabel>
+        {isMediumScreen?<Box component='div'><Typography component='p' variant='body2'>STEP 2</Typography>
+            <Typography component='p' variant='body2'>SELECT PLAN</Typography>
+        </Box>:''}
+            
         </StepLabel>
     </Step>
     <Step>
-        <StepLabel>
-            <Box>STEP 3</Box>
-            ADD-ONS
+    <StepLabel>
+        {isMediumScreen?<Box component='div'><Typography component='p' variant='body2'>STEP 3</Typography>
+            <Typography component='p' variant='body2'>ADD-ONS</Typography>
+        </Box>:''}
+            
         </StepLabel>
     </Step>
     <Step>
-        <StepLabel>
-            <Box>STEP 4</Box>
-            SUMMARY
+    <StepLabel>
+        {isMediumScreen?<Box component='div'><Typography component='p' variant='body2'>STEP 4</Typography>
+            <Typography component='p' variant='body2'>SUMMARY</Typography>
+        </Box>:''}
+            
         </StepLabel>
     </Step>
 </Stepper>
