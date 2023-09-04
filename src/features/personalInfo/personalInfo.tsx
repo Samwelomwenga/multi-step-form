@@ -1,6 +1,6 @@
 import { Typography,TextField, Stack ,FormLabel,Box} from "@mui/material";
 import Header from "../header/Header";
-import { NextButton } from "../../componets/Button";
+import Buttons from "../../componets/Buttons";
 const PersonalInfo:React.FC = () => {
   
   return (
@@ -21,7 +21,7 @@ const PersonalInfo:React.FC = () => {
         <TextField type="email" required margin="dense"  placeholder="e.g stephenking@lorem.com" fullWidth size="small"/>
         <FormLabel>Phone Number</FormLabel>
         <TextField type="tel" required  margin="dense" placeholder="e.g +1 234 567 890" fullWidth size="small"/>
-            <NextButton/>
+        <Buttons/>
         </form>
       </Stack>
         </Box>

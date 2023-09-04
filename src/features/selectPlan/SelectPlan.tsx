@@ -12,7 +12,7 @@ import AdvanceIcon from "../../assets/images/icon-advanced.svg";
 import ProIcon from "../../assets/images/icon-pro.svg";
 
 import Header from "../header/Header";
-import { BackButton,NextButton } from "../../componets/Button";
+import Buttons from "../../componets/Buttons";
 import React from "react";
 
 interface plansInterface {
@@ -66,10 +66,7 @@ const SelectPlan:React.FC = () => {
             <Switch/>
             <Typography>Yearly</Typography>
             </Stack >
-            <Stack sx={{display:"flex",flexDirection:"row",justifyContent:"space-between"}}>
-            <BackButton />
-            <NextButton />
-          </Stack>
+            <Buttons/>
         </form>
       </Stack>
     </Stack>

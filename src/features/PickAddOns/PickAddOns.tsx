@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import Header from "../header/Header";
 
-import { NextButton, BackButton } from "../../componets/Button";
+import { NextButton, BackButton } from "../../componets/Buttons";
 
 const PickAddOns: React.FC = () => {
   const addOns = [
