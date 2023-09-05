@@ -22,6 +22,7 @@ const theme = createTheme({
     Primary: {
         MarineBlue: {
           main: "hsl(213, 96%, 18%)",
+          light: "hsl(213, 96%, 25%)",
         },
         StrawberryRed: {
             main: "hsl(354, 84%, 57%)",
@@ -37,6 +38,9 @@ const theme = createTheme({
           },
     
   },
-}});
+},
+typography: {
+    fontFamily: ['Ubuntu', 'sans-serif'].join(','),
+  },});
 
 export default theme;

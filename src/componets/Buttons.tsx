@@ -3,19 +3,26 @@ import {useTheme} from '@mui/material/styles'
 // import { useNavigate } from 'react-router-dom'
 
 const NextButton:React.FC = () => {
-  const theme = useTheme()
+  const theme = useTheme();
+  const primary=theme.palette.Primary;
+  const neutral=theme.palette.neutral;
 
   return (
-    <Button type='button' variant='contained' sx={{bgcolor:theme.palette.Primary.PastleBlue}}>Next Step</Button>
+    <Button type='button' variant='contained' size='small' sx={{bgcolor:primary.MarineBlue.main,color:neutral.LightGray.main,py:".4rem",px:".8rem",":hover":{bgcolor:primary.MarineBlue.light}}}>Next Step</Button>
   )
 }
  const BackButton:React.FC=()=>{
+  const theme = useTheme();
+  const primary=theme.palette.Primary;
+  const neutral=theme.palette.neutral;
     // const navigate=useNavigate()
     // const handleBackButton = () => {
     //     navigate(-1)
     // }
     return(
-        <Button variant='text' >Go Back</Button>
+        <Button variant='text' size='small' sx={{color:neutral.CoolGray.main,fontWeight:"700",py:".4rem",px:".8rem",":hover":{
+          color:primary.MarineBlue.main
+        }}} >Go Back</Button>
     )
 }
 

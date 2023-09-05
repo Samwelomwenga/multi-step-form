@@ -34,4 +34,13 @@ declare module '@mui/material/styles' {
         LightBlue: PaletteColorOptions;
     }
   }
+
+  interface Typography {
+    fontFamily: string;
+  }
+    interface TypographyOptions {
+        fontFamily: string;
+    }
+
+    
 }
