@@ -5,7 +5,9 @@ import {
   StepLabel,
   useMediaQuery,
   Typography,
+  useTheme
 } from "@mui/material";
+// import makeStyles from "@mui/material/styles";
 
 import sidebarDesktop from "../../assets/images/bg-sidebar-desktop.svg";
 import sidebarMobile from "../../assets/images/bg-sidebar-mobile.svg";
@@ -18,6 +20,12 @@ type typeStep = {
 const Header: React.FC = () => {
   const isMediumScreen = useMediaQuery("(min-width:960px)");
 
+  const theme=useTheme();
+//   const primary=theme.palette.Primary;
+  const neutral=theme.palette.neutral;
+
+  
+  
   const steps: typeStep[] = [
     {
       name: "STEP 1",
@@ -42,9 +50,11 @@ const Header: React.FC = () => {
       component="header"
       sx={{
         backgroundRepeat: "no-repeat",
+        backgroundSize:{md:"contain"},
         justifyContent: "center",
         height: { xs: "7.5rem", md: "100vh" },
         width: "100%",
+        p:"1.5rem",
         backgroundImage: {
           xs: `url(${sidebarMobile})`,
           md: `url(${sidebarDesktop})`,
@@ -56,16 +66,18 @@ const Header: React.FC = () => {
         nonLinear
         connector={null}
         orientation={isMediumScreen ? "vertical" : "horizontal"}
+        sx={{gap:{md:".7rem"},ml:{xs:"4rem",md:".3rem"}}}
+    
       >
         {steps.map((step) => (
-          <Step key={step.name}>
+          <Step key={step.name} sx={{justifyContent:"center"}}>
             <StepLabel>
               {isMediumScreen ? (
-                <Box component="div">
-                  <Typography component="p" variant="body2">
+                <Box component="div" sx={{pl:".5rem"}}>
+                  <Typography component="p" variant="body2" sx={{color:neutral.CoolGray.main}}>
                     {step.name}
                   </Typography>
-                  <Typography component="p" variant="body2">
+                  <Typography component="p" variant="body2" sx={{color:neutral.White.main}}>
                     {step.label}
                   </Typography>
                 </Box>
