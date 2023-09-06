@@ -2,22 +2,25 @@ import {CssBaseline} from '@mui/material'
 import {ThemeProvider} from '@mui/material/styles'
 
 import customTheme from '../customTheme'
+import PersonalInfoStep from '../steps/PersonalInfoStep'
+
 // import FinishUpStep from '../steps/FinishUpStep'
 // import ThankYouStep from '../steps/ThankYouStep'
-// import PersonalInfo from '../features/personalInfo/PersonalInfo'
 // import PickAddOns from '../features/PickAddOns/PickAddOns'
-import SelectPlan from '../features/selectPlan/SelectPlan'
+// import SelectPlan from '../features/selectPlan/SelectPlan'
+
 function App() {
 
   return (
     <ThemeProvider theme={customTheme}>
     <>
     <CssBaseline/>
+    <PersonalInfoStep/>
 {/* <NextButton/> */}
 {/* <BackButton/> */}
 {/* <PersonalInfo/> */}
 {/* <PickAddOns/> */}
-<SelectPlan/>
+{/* <SelectPlan/> */}
 {/* <ThankYouStep/> */}
 {/* <FinishUpStep/> */}
     </>

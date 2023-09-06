@@ -1,31 +1,75 @@
-import { Typography,TextField, Stack ,FormLabel,Box} from "@mui/material";
-import Header from "../header/Header";
+import {TextField,  FormLabel,useTheme } from "@mui/material";
+
 import Buttons from "../../componets/Buttons";
-const PersonalInfo:React.FC = () => {
-  
+
+type inputFieldsType = {
+  label: "Name" | "Email Address" | "Phone Number";
+  placeholder: string;
+  type:"tel"|"text"
+};
+
+const PersonalInfo: React.FC = () => {
+  const theme=useTheme();
+  const primary=theme.palette.Primary;
+    const neutral=theme.palette.neutral;
+
+
+  const inputFields: inputFieldsType[] = [
+    {
+      label: "Name",
+      placeholder: "e.g Stephen King",
+      type:"text"
+    },
+    {
+      label: "Email Address",
+      placeholder: "e.g stephenking@lorem.com",
+      type:"text"
+    },
+    {
+      label: "Phone Number",
+      placeholder: "e.g +1 234 567 890",
+      type:"tel"
+    },
+  ];
+
   return (
-    <Stack component='main'  spacing={{md:0}} sx={{backgroundColor:{xs:'grey',md:'white'},height:'100vh'}}  direction={{md:'row'}}>
-      <Header />
-      <Box sx={{width:'100%'}}>
-      <Stack component='section' mx={2} sx={{backgroundColor:'white',borderRadius:"3%",px:'1rem'}} >
-        <Typography component="h1" variant="h5" my={2}>
-          Personal info
-        </Typography>
-        <Typography component="p" variant="body1" mb={2}>
-          Please provide your name,email address, and phone number.
-        </Typography>
-        <form noValidate autoComplete="off">
-            <FormLabel>Name</FormLabel>
-        <TextField type="text" required margin="dense"  placeholder="e.g Stephen King"  fullWidth size="small"/>
-        <FormLabel>Email Adrress</FormLabel>
-        <TextField type="email" required margin="dense"  placeholder="e.g stephenking@lorem.com" fullWidth size="small"/>
-        <FormLabel>Phone Number</FormLabel>
-        <TextField type="tel" required  margin="dense" placeholder="e.g +1 234 567 890" fullWidth size="small"/>
-        <Buttons/>
-        </form>
-      </Stack>
-        </Box>
-    </Stack>
+          <form noValidate autoComplete="off">
+            {inputFields.map((inputField) => (
+              <>
+                <FormLabel sx={{color:primary.MarineBlue.main}}>{inputField.label}</FormLabel>
+                <TextField
+                  type={inputField.type}
+                  required
+                  margin="dense"
+                  placeholder={inputField.placeholder}
+                  fullWidth
+                  size="small"
+                  inputProps={{
+                    sx:{
+                      color:primary.MarineBlue.main,
+                      
+                    }
+                  }}
+                  sx={{
+                    mb:{md:3},
+                    "& .MuiOutlinedInput-root":{
+                      "& > fieldset":{borderColor:neutral.CoolGray.main,
+                      borderRadius:".5rem"}
+                    },
+                    "& .MuiOutlinedInput-root.Mui-focused":{
+                      "& > fieldset":{borderColor:primary.PurplishBlue.main}
+                    },
+                    "& .MuiOutlinedInput-root:hover":{
+                      "& > fieldset":{cursor:"pointer"}
+                    }
+                  }}
+                />
+              </>
+            ))}
+
+            <Buttons />
+          </form>
+    
   );
 };
 
