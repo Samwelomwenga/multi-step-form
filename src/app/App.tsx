@@ -5,8 +5,8 @@ import customTheme from '../customTheme'
 // import PersonalInfoStep from '../steps/PersonalInfoStep'
 // import PickAddOnsStep from '../steps/PickAddOnsStep'
 
-// import FinishUpStep from '../steps/FinishUpStep'
-import ThankYouStep from '../steps/ThankYouStep'
+import FinishUpStep from '../steps/FinishUpStep'
+// import ThankYouStep from '../steps/ThankYouStep'
 
 function App() {
 
@@ -16,8 +16,8 @@ function App() {
     <CssBaseline/>
     {/* <PersonalInfoStep/> */}
     {/* <PickAddOnsStep/> */}
-<ThankYouStep/>
-{/* <FinishUpStep/> */}
+<FinishUpStep/>
+{/* <ThankYouStep/> */}
     </>
     </ThemeProvider>
   )
