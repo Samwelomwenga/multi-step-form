@@ -1,9 +1,8 @@
 import {Stack,Box,Typography,useTheme} from '@mui/material'
 
-
 import Header from '../features/header/Header'
-import PersonalInfo from '../features/personalInfo/PersonalInfo'
-const PersonalInfoStep:React.FC = () => {
+import PickAddOns from '../features/PickAddOns/PickAddOns';
+const PickAddOnsStep:React.FC = () => {
     const theme=useTheme();
     const primary=theme.palette.Primary;
     const neutral=theme.palette.neutral;
@@ -26,16 +25,16 @@ const PersonalInfoStep:React.FC = () => {
           }}}
         >
           <Typography component="h1" variant="h5" my={2} sx={{color:primary.MarineBlue.main,fontWeight:"700"}}>
-            Personal info
+            Pick adds-ons
           </Typography>
           <Typography component="p" variant="body1" mb={2} sx={{color:neutral.CoolGray.main}}>
-            Please provide your name,email address, and phone number.
+            Add-ons help enhance your gaming experience
           </Typography>
-          <PersonalInfo/>
+          <PickAddOns/>
         </Stack>
       </Box>
     </Stack>
   )
 }
 
-export default PersonalInfoStep
+export default PickAddOnsStep

@@ -59,7 +59,7 @@ const Buttons: React.FC = () => {
     <Stack
       sx={{
         display: "flex",
-        width:{xs:"100%",md:"60%"},
+        width:{xs:"100%",md:"55%"},
         flexDirection: "row",
         justifyContent: "space-between",
         position:"absolute",
@@ -67,6 +67,10 @@ const Buttons: React.FC = () => {
       md:"10%"},
         bgcolor:neutral.White.main,
         py:"1rem",
+        px:{
+          xs:".7rem",
+          md:"0"
+        },
         ml:{xs:"-2rem",
       md:"0"}
       }}

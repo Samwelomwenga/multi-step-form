@@ -4,12 +4,15 @@ import {
   FormGroup,
   FormControlLabel,
   Checkbox,
+  useTheme,
 } from "@mui/material";
-import Header from "../header/Header";
-
-import { NextButton, BackButton } from "../../componets/Buttons";
+import Buttons from "../../componets/Buttons";
 
 const PickAddOns: React.FC = () => {
+  const theme = useTheme();
+  const primary = theme.palette.Primary;
+  const neutral = theme.palette.neutral;
+
   const addOns = [
     {
       heading: "Online  service",
@@ -25,53 +28,63 @@ const PickAddOns: React.FC = () => {
     },
   ];
   return (
-    <Stack component="main" direction={{ md: "row" }} sx={{bgcolor:'grey', minHeight:'100vh'}
-    }>
-      <Header />
-      <Stack component="section" sx={{bgcolor:"white",pl:'2.3rem',width:"100%",marginX:'auto',borderRadius:"3%",ml:{
-        md:"auto"
-      }}}>
-        <Typography component="h2" variant="h5" sx={{pt:'1.5rem'}}>
-          Pick adds-ons
-        </Typography>
-        <Typography component="p" variant="body2" sx={{py:'1rem'}}>
-          Add-ons help enhance your gaming experience
-        </Typography>
-        <form autoComplete="off" noValidate>
-          <FormGroup sx={{marginX:'auto',gap:".5rem"}}>
-            {addOns.map((addOn) => (
-              <FormControlLabel
-                key={addOn.heading}
-                sx={{
-                  backgroundColor: "red",
-                  border: "2px solid black",
-                  p: ".5rem",
-                  borderRadius: ".5rem",
-                }}
-                label={
-                  <Stack direction="row">
-                    <Stack>
-                      <Typography component="h3" variant="body1">
-                        {addOn.heading}
-                      </Typography>
-                      <Typography component="p" variant="body2">
-                        {addOn.content}
-                      </Typography>
-                    </Stack>
-                    <Typography>+$ 1/mo</Typography>
-                  </Stack>
-                }
-                control={<Checkbox />}
+    <form autoComplete="off" noValidate>
+      <FormGroup sx={{ gap: "1rem" }}>
+        {addOns.map((addOn) => (
+          <FormControlLabel
+            key={addOn.heading}
+            sx={{
+              border: "1px solid",
+              borderColor: neutral.LightGray.main,
+              p: ".5rem",
+              borderRadius: ".5rem",
+              "&:hover":{
+                borderColor:primary.PurplishBlue.main
+              },
+              
+            }}
+            label={
+              <Stack direction="row">
+                <Stack>
+                  <Typography
+                    component="h3"
+                    variant="body1"
+                    sx={{ color: primary.MarineBlue.main, fontWeight: "700" }}
+                  >
+                    {addOn.heading}
+                  </Typography>
+                  <Typography
+                    component="p"
+                    variant="body2"
+                    sx={{ color: neutral.CoolGray.main, fontWeight: "500" }}
+                  >
+                    {addOn.content}
+                  </Typography>
+                </Stack>
+                <Typography
+                  component="p"
+                  variant="body2"
+                  sx={{ color: primary.PurplishBlue.main }}
+                >
+                  +$ 1/mo
+                </Typography>
+              </Stack>
+            }
+            control={
+              <Checkbox
+              sx={{
+                color: primary.PurplishBlue.main,
+                '&.Mui-checked': {
+                  color: primary.PurplishBlue.main,
+                },
+              }}
               />
-            ))}
-          </FormGroup>
-          <Stack sx={{display:"flex",flexDirection:"row",justifyContent:"space-between"}}>
-            <BackButton />
-            <NextButton />
-          </Stack>
-        </form>
-      </Stack>
-    </Stack>
+            }
+          />
+        ))}
+      </FormGroup>
+      <Buttons />
+    </form>
   );
 };
 
