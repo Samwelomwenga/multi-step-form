@@ -35,7 +35,7 @@ const FinishUpStep: React.FC = () => {
           },
           py: "2rem",
           borderRadius: ".5rem",
-          bgcolor: "white",
+          bgcolor: neutral.White.main,
           width: "100%",
         }}
       >

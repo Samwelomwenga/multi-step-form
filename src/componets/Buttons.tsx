@@ -14,7 +14,7 @@ const NextButton: React.FC = () => {
       size="small"
       sx={{
         bgcolor: primary.MarineBlue.main,
-        color: neutral.LightGray.main,
+        color: neutral.Magnolia.main,
         py: ".4rem",
         px: ".8rem",
         ":hover": { bgcolor: primary.MarineBlue.light },

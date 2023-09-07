@@ -3,9 +3,10 @@ import {ThemeProvider} from '@mui/material/styles'
 
 import customTheme from '../customTheme'
 // import PersonalInfoStep from '../steps/PersonalInfoStep'
+import SelectPlanStep from '../steps/SelectPlanStep'
 // import PickAddOnsStep from '../steps/PickAddOnsStep'
 
-import FinishUpStep from '../steps/FinishUpStep'
+// import FinishUpStep from '../steps/FinishUpStep'
 // import ThankYouStep from '../steps/ThankYouStep'
 
 function App() {
@@ -15,8 +16,9 @@ function App() {
     <>
     <CssBaseline/>
     {/* <PersonalInfoStep/> */}
+    <SelectPlanStep/>
     {/* <PickAddOnsStep/> */}
-<FinishUpStep/>
+{/* <FinishUpStep/> */}
 {/* <ThankYouStep/> */}
     </>
     </ThemeProvider>
