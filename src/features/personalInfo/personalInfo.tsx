@@ -1,75 +1,106 @@
-import {TextField,  FormLabel,useTheme } from "@mui/material";
+import { TextField, Box, FormLabel,FormHelperText, useTheme } from "@mui/material";
 
-import Buttons from "../../componets/Buttons";
+import { useForm } from "react-hook-form";
+import { DevTool } from "@hookform/devtools";
+
+import { useDispatch, useSelector } from "react-redux";
+import { personalInfoState, updatePersonalInfo } from "./personalInfoSlice";
+
+import Buttons from "../../components/Buttons";
 
 type inputFieldsType = {
   label: "Name" | "Email Address" | "Phone Number";
   placeholder: string;
-  type:"tel"|"text"
+  InputName: "name" | "email" | "phone";
+  type: "name" | "email" | "tel";
 };
 
 const PersonalInfo: React.FC = () => {
-  const theme=useTheme();
-  const primary=theme.palette.Primary;
-    const neutral=theme.palette.neutral;
+  const theme = useTheme();
+  const primary = theme.palette.Primary;
+  const neutral = theme.palette.neutral;
 
+  const dispatch = useDispatch();
+  const personalInfo = useSelector(
+    (state: { personalInfo: personalInfoState }) => state.personalInfo
+  );
+  const { register, handleSubmit, control,formState:{errors} } = useForm<personalInfoState>(
+    { defaultValues: personalInfo }
+  );
+  // console.log(personalInfo)
+  const onSubmit = (data: personalInfoState) => {
+    dispatch(updatePersonalInfo(data));
+  };
 
   const inputFields: inputFieldsType[] = [
     {
       label: "Name",
       placeholder: "e.g Stephen King",
-      type:"text"
+      InputName: "name",
+      type: "name",
     },
     {
       label: "Email Address",
       placeholder: "e.g stephenking@lorem.com",
-      type:"text"
+      InputName: "email",
+      type: "email",
     },
     {
       label: "Phone Number",
       placeholder: "e.g +1 234 567 890",
-      type:"tel"
+      InputName: "phone",
+      type: "tel",
     },
   ];
+  // const watchValue = watch();
+  // console.log(watchValue);
 
   return (
-          <form noValidate autoComplete="off">
-            {inputFields.map((inputField) => (
-              <>
-                <FormLabel sx={{color:primary.MarineBlue.main}}>{inputField.label}</FormLabel>
-                <TextField
-                  type={inputField.type}
-                  required
-                  margin="dense"
-                  placeholder={inputField.placeholder}
-                  fullWidth
-                  size="small"
-                  inputProps={{
-                    sx:{
-                      color:primary.MarineBlue.main,
-                      
-                    }
-                  }}
-                  sx={{
-                    mb:{md:3},
-                    "& .MuiOutlinedInput-root":{
-                      "& > fieldset":{borderColor:neutral.CoolGray.main,
-                      borderRadius:".5rem"}
-                    },
-                    "& .MuiOutlinedInput-root.Mui-focused":{
-                      "& > fieldset":{borderColor:primary.PurplishBlue.main}
-                    },
-                    "& .MuiOutlinedInput-root:hover":{
-                      "& > fieldset":{cursor:"pointer"}
-                    }
-                  }}
-                />
-              </>
-            ))}
+    <>
+      <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
+        {inputFields.map((inputField) => (
+          <Box key={inputField.label}>
+            <FormLabel sx={{ color: primary.MarineBlue.main }}>
+              {inputField.label}
+            </FormLabel>
+            {errors[inputField.InputName]?.message &&<FormHelperText error>This field is required</FormHelperText>}
+            <TextField
+              type={inputField.type}
+              {...register(inputField.InputName,{required:true})}
+              required
+              // error
+              margin="dense"
+              placeholder={inputField.placeholder}
+              fullWidth
+              size="small"
+              inputProps={{
+                sx: {
+                  color: primary.MarineBlue.main,
+                },
+              }}
+              sx={{
+                mb: { md: 3 },
+                "& .MuiOutlinedInput-root": {
+                  "& > fieldset": {
+                    borderColor: neutral.CoolGray.main,
+                    borderRadius: ".5rem",
+                  },
+                },
+                "& .MuiOutlinedInput-root.Mui-focused": {
+                  "& > fieldset": { borderColor: primary.PurplishBlue.main },
+                },
+                "& .MuiOutlinedInput-root:hover": {
+                  "& > fieldset": { cursor: "pointer" },
+                },
+              }}
+            />
+          </Box>
+        ))}
 
-            <Buttons />
-          </form>
-    
+        <Buttons />
+      </form>
+      <DevTool control={control} />
+    </>
   );
 };
 
