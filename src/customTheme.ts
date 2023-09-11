@@ -29,6 +29,8 @@ const theme = createTheme({
           },
           PurplishBlue: {
             main: "hsl(243, 100%, 62%)",
+            light: "hsl(243, 100%, 62%,0.15)",
+            
           },
           PastleBlue: {
             main: "hsl(228, 100%, 84%)",

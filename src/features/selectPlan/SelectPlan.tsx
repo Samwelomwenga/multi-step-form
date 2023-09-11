@@ -12,18 +12,20 @@ import {
 import { useForm, Controller } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 
-import { useSelector ,useDispatch} from "react-redux";
-import { selectPlanState, updateBilling } from "./selectPlanSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { selectPlanState, updateBilling, updatePlan } from "./selectPlanSlice";
 
-import ArcadeIcon from "../../assets/images/icon-arcade.svg";
-import AdvanceIcon from "../../assets/images/icon-advanced.svg";
-import ProIcon from "../../assets/images/icon-pro.svg";
+import { ReactComponent as ArcadeIcon } from "../../assets/images/icon-arcade.svg";
+import { ReactComponent as AdvanceIcon } from "../../assets/images/icon-advanced.svg";
+import { ReactComponent as ProIcon } from "../../assets/images/icon-pro.svg";
 
 import Buttons from "../../components/Buttons";
 
 interface plansInterface {
   name: "Arcade" | "Advance" | "Pro";
   icon: JSX.Element;
+  value: "arcade" | "advance" | "pro";
+  price:string;
 }
 const SelectPlan: React.FC = () => {
   const theme = useTheme();
@@ -34,16 +36,37 @@ const SelectPlan: React.FC = () => {
   const selectPlan = useSelector(
     (state: { selectPlan: selectPlanState }) => state.selectPlan
   );
-  const dispatch=useDispatch()
-  const handleSwitch = (value:boolean) => {
+  const dispatch = useDispatch();
+  const handleSelectedBilling = (value: boolean) => {
     const updatedSelectPlanState: selectPlanState = {
       ...selectPlan,
       switchValue: value,
     };
-dispatch(updateBilling(updatedSelectPlanState))
-  }
-  const {billing}=selectPlan
-  console.log(billing)
+    dispatch(updateBilling(updatedSelectPlanState));
+  };
+
+  const handleSelectedPlan = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    value: string
+  ) => {
+    // Create a selectPlanState object with the selectedPlan value
+    const selectedPlanState: selectPlanState = {
+      plan: {
+        name: event.target.value as "arcade" | "advance" | "pro",
+        price: 9,
+      },
+      billing: "monthly",
+      switchValue: false,
+      selectedPlan: value,
+    };
+
+    dispatch(updatePlan(selectedPlanState));
+  };
+
+  const {
+    billing,
+    plan: { name,},
+  } = selectPlan;
 
   const { control } = useForm<selectPlanState>({ defaultValues: selectPlan });
 
@@ -51,80 +74,113 @@ dispatch(updateBilling(updatedSelectPlanState))
     {
       name: "Arcade",
       icon: <ArcadeIcon />,
+      value: "arcade",
+      price: billing==="monthly"?"$9/mo":"$90/yr",
     },
     {
       name: "Advance",
       icon: <AdvanceIcon />,
+      value: "advance",
+      price: billing==="monthly"?"$12/mo":"$120/yr",
+
     },
     {
       name: "Pro",
       icon: <ProIcon />,
+      value: "pro",
+      price: billing==="monthly"?"$15/mo":"$150/yr",
+
     },
   ];
   return (
     <>
       <form noValidate autoComplete="off">
-        <RadioGroup
-          sx={{
-            gap: { xs: "1rem", md: "2rem" },
-            mb: "1.3rem",
-            display: { md: "inline-flex", flexDirection: "row" },
-          }}
-        >
-          {plans.map((plan) => (
-            <FormControlLabel
-              key={plan.name}
-              labelPlacement={isMediumScreen ? "bottom" : "end"}
-              sx={{
-                border: "2px solid",
-                borderColor: neutral.LightGray.main,
-                p: ".5rem",
-                pr: { md: "5rem" },
-                pl: {
-                  md: "1rem",
-                },
-                py: {
-                  md: "1.5rem",
-                },
-                ml: ".1rem",
-                borderRadius: ".5rem",
-                width: { xs: "100%", md: "auto" },
+        <Controller
+          name="plan"
+          control={control}
+          render={({ field }) => (
+            <RadioGroup
+              {...field}
+              onChange={(event) => {
+                handleSelectedPlan(event, event.target.value);
               }}
-              label={
-                <Stack>
-                  <Typography
-                    component="p"
-                    variant="body1"
-                    sx={{
-                      color: primary.MarineBlue.main,
-                      fontWeight: "700",
-                      mt: {
-                        md: "4rem",
-                      },
-                    }}
-                  >
-                    {plan.name}
-                  </Typography>
-                  <Typography
-                    component="p"
-                    variant="body1"
-                    sx={{ color: neutral.CoolGray.main, fontWeight: "400" }}
-                  >
-                    $90/Yr
-                  </Typography>
-                  <Typography
-                    component="p"
-                    variant="body2"
-                    sx={{ color: primary.MarineBlue.main, fontWeight: "700" }}
-                  >
-                    2 months free
-                  </Typography>
-                </Stack>
-              }
-              control={<Radio icon={plan.icon} />}
-            />
-          ))}
-        </RadioGroup>
+              sx={{
+                gap: { xs: "1rem", md: "2rem" },
+                mb: "1.3rem",
+                display: { md: "inline-flex", flexDirection: "row" },
+              }}
+            >
+              {plans.map((plan) => (
+                <FormControlLabel
+                  key={plan.name}
+                  value={plan.value}
+                  labelPlacement={isMediumScreen ? "bottom" : "end"}
+                  sx={{
+                    border: "2px solid",
+                    borderColor:
+                      plan.name.toLocaleLowerCase() === name
+                        ? primary.PurplishBlue.main
+                        : neutral.LightGray.main,
+                    bgcolor:
+                      plan.name.toLocaleLowerCase() === name
+                        ? primary.PurplishBlue.light
+                        : neutral.Alabaster.main,
+                    p: ".5rem",
+                    pr: { md: "5rem" },
+                    pl: {
+                      md: "1rem",
+                    },
+                    py: {
+                      md: "1.5rem",
+                    },
+                    ml: ".1rem",
+                    borderRadius: ".5rem",
+                    width: { xs: "100%", md: "auto" },
+                  }}
+                  label={
+                    <Stack>
+                      <Typography
+                        component="p"
+                        variant="body1"
+                        sx={{
+                          color: primary.MarineBlue.main,
+                          fontWeight: "700",
+                          mt: {
+                            md: "4rem",
+                          },
+                        }}
+                      >
+                        {plan.name}
+                      </Typography>
+                      <Typography
+                        component="p"
+                        variant="body1"
+                        sx={{ color: neutral.CoolGray.main, fontWeight: "400" }}
+                      >
+                        {plan.price}
+                      
+                      </Typography>
+                      {billing === "yearly" && (
+                        <Typography
+                          component="p"
+                          variant="body2"
+                          sx={{
+                            color: primary.MarineBlue.main,
+                            fontWeight: "700",
+                          }}
+                        >
+                          2 months free
+                        </Typography>
+                      )}
+                    </Stack>
+                  }
+                  control={<Radio icon={plan.icon} checkedIcon={plan.icon} />}
+                />
+              ))}
+            </RadioGroup>
+          )}
+        />
+
         <Stack
           component="div"
           direction="row"
@@ -145,21 +201,27 @@ dispatch(updateBilling(updatedSelectPlanState))
           <Typography
             component="p"
             sx={{
-              pl: { md: "13rem", fontWeight: "700",color:billing==="monthly"?primary.MarineBlue.main:neutral.CoolGray.main },
+              pl: {
+                md: "13rem",
+                fontWeight: "700",
+                color:
+                  billing === "monthly"
+                    ? primary.MarineBlue.main
+                    : neutral.CoolGray.main,
+              },
             }}
           >
             Monthly
           </Typography>
           <Controller
-            name="switchValue" // Type '"billingSwitch"' is not assignable to type '"switch" | "plan" | "billing" | "switchValue"'.ts(2322)
+            name="switchValue"
             control={control}
-            // defaultValue={false}
             render={({ field }) => (
               <Switch
                 {...field}
-                onChange={(event)=>{
-                  field.onChange(event.target.checked)
-                  handleSwitch(event.target.checked)
+                onChange={(event) => {
+                  field.onChange(event.target.checked);
+                  handleSelectedBilling(event.target.checked);
                 }}
                 sx={{
                   "&.MuiSwitch-root": {
@@ -205,7 +267,16 @@ dispatch(updateBilling(updatedSelectPlanState))
             )}
           />
 
-          <Typography component="p" sx={{ fontWeight: "700",color:billing==="yearly"?primary.MarineBlue.main:neutral.CoolGray.main}}>
+          <Typography
+            component="p"
+            sx={{
+              fontWeight: "700",
+              color:
+                billing === "yearly"
+                  ? primary.MarineBlue.main
+                  : neutral.CoolGray.main,
+            }}
+          >
             Yearly
           </Typography>
         </Stack>
