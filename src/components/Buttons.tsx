@@ -13,11 +13,11 @@ const NextButton: React.FC = () => {
       variant="contained"
       size="small"
       sx={{
-        bgcolor: primary.MarineBlue.main,
-        color: neutral.Magnolia.main,
+        bgcolor: primary.marineBlue.main,
+        color: neutral.magnolia.main,
         py: ".4rem",
         px: ".8rem",
-        ":hover": { bgcolor: primary.MarineBlue.light },
+        ":hover": { bgcolor: primary.marineBlue.light },
       }}
     >
       Next Step
@@ -37,12 +37,12 @@ const BackButton: React.FC = () => {
       variant="text"
       size="small"
       sx={{
-        color: neutral.CoolGray.main,
+        color: neutral.coolGray.main,
         fontWeight: "700",
         py: ".4rem",
         px: ".8rem",
         ":hover": {
-          color: primary.MarineBlue.main,
+          color: primary.marineBlue.main,
         },
       }}
     >
@@ -65,7 +65,7 @@ const Buttons: React.FC = () => {
         position:"absolute",
         bottom:{xs:"0",
       md:"10%"},
-        bgcolor:neutral.White.main,
+        bgcolor:neutral.white.main,
         py:"1rem",
         px:{
           xs:".7rem",

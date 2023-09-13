@@ -3,35 +3,35 @@ import { PaletteColor, PaletteColorOptions } from "@mui/material";
 declare module '@mui/material/styles' {
   interface Palette {
     neutral: {
-        CoolGray: PaletteColor;
-        LightGray: PaletteColor;
-        Magnolia: PaletteColor;
-        Alabaster: PaletteColor;
-        White: PaletteColor;
+        coolGray: PaletteColor;
+        lightGray: PaletteColor;
+        magnolia: PaletteColor;
+        alabaster: PaletteColor;
+        white: PaletteColor;
     },
     Primary: {
-        MarineBlue: PaletteColor;
-        StrawberryRed: PaletteColor;
-        PurplishBlue: PaletteColor;
-        PastleBlue: PaletteColor;
-        LightBlue: PaletteColor;
+        marineBlue: PaletteColor;
+        strawberryRed: PaletteColor;
+        purplishBlue: PaletteColor;
+        pastleBlue: PaletteColor;
+        lightBlue: PaletteColor;
     }
 
   }
   interface PaletteOptions {
     neutral:{
-        CoolGray: PaletteColorOptions;
-        LightGray: PaletteColorOptions;
-        Magnolia: PaletteColorOptions;
-        Alabaster: PaletteColorOptions;
-        White: PaletteColorOptions;
+        coolGray: PaletteColorOptions;
+        lightGray: PaletteColorOptions;
+        magnolia: PaletteColorOptions;
+        alabaster: PaletteColorOptions;
+        white: PaletteColorOptions;
     },
     Primary: {
-        MarineBlue: PaletteColorOptions;
-        StrawberryRed: PaletteColorOptions;
-        PurplishBlue: PaletteColorOptions;
-        PastleBlue: PaletteColorOptions;
-        LightBlue: PaletteColorOptions;
+        marineBlue: PaletteColorOptions;
+        strawberryRed: PaletteColorOptions;
+        purplishBlue: PaletteColorOptions;
+        pastleBlue: PaletteColorOptions;
+        lightBlue: PaletteColorOptions;
     }
   }
 

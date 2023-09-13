@@ -25,7 +25,7 @@ interface plansInterface {
   name: "Arcade" | "Advance" | "Pro";
   icon: JSX.Element;
   value: "arcade" | "advance" | "pro";
-  price:string;
+  price: string;
 }
 const SelectPlan: React.FC = () => {
   const theme = useTheme();
@@ -65,7 +65,7 @@ const SelectPlan: React.FC = () => {
 
   const {
     billing,
-    plan: { name,},
+    plan: { name },
   } = selectPlan;
 
   const { control } = useForm<selectPlanState>({ defaultValues: selectPlan });
@@ -75,21 +75,19 @@ const SelectPlan: React.FC = () => {
       name: "Arcade",
       icon: <ArcadeIcon />,
       value: "arcade",
-      price: billing==="monthly"?"$9/mo":"$90/yr",
+      price: billing === "monthly" ? "$9/mo" : "$90/yr",
     },
     {
       name: "Advance",
       icon: <AdvanceIcon />,
       value: "advance",
-      price: billing==="monthly"?"$12/mo":"$120/yr",
-
+      price: billing === "monthly" ? "$12/mo" : "$120/yr",
     },
     {
       name: "Pro",
       icon: <ProIcon />,
       value: "pro",
-      price: billing==="monthly"?"$15/mo":"$150/yr",
-
+      price: billing === "monthly" ? "$15/mo" : "$150/yr",
     },
   ];
   return (
@@ -119,12 +117,12 @@ const SelectPlan: React.FC = () => {
                     border: "2px solid",
                     borderColor:
                       plan.name.toLocaleLowerCase() === name
-                        ? primary.PurplishBlue.main
-                        : neutral.LightGray.main,
+                        ? primary.purplishBlue.main
+                        : neutral.lightGray.main,
                     bgcolor:
                       plan.name.toLocaleLowerCase() === name
-                        ? primary.PurplishBlue.light
-                        : neutral.Alabaster.main,
+                        ? primary.purplishBlue.light
+                        : neutral.alabaster.main,
                     p: ".5rem",
                     pr: { md: "5rem" },
                     pl: {
@@ -143,7 +141,7 @@ const SelectPlan: React.FC = () => {
                         component="p"
                         variant="body1"
                         sx={{
-                          color: primary.MarineBlue.main,
+                          color: primary.marineBlue.main,
                           fontWeight: "700",
                           mt: {
                             md: "4rem",
@@ -155,17 +153,16 @@ const SelectPlan: React.FC = () => {
                       <Typography
                         component="p"
                         variant="body1"
-                        sx={{ color: neutral.CoolGray.main, fontWeight: "400" }}
+                        sx={{ color: neutral.coolGray.main, fontWeight: "400" }}
                       >
                         {plan.price}
-                      
                       </Typography>
                       {billing === "yearly" && (
                         <Typography
                           component="p"
                           variant="body2"
                           sx={{
-                            color: primary.MarineBlue.main,
+                            color: primary.marineBlue.main,
                             fontWeight: "700",
                           }}
                         >
@@ -185,7 +182,7 @@ const SelectPlan: React.FC = () => {
           component="div"
           direction="row"
           sx={{
-            bgcolor: neutral.LightGray.main,
+            bgcolor: neutral.lightGray.main,
             px: "3rem",
             width: "100%",
             borderRadius: ".5rem",
@@ -206,8 +203,8 @@ const SelectPlan: React.FC = () => {
                 fontWeight: "700",
                 color:
                   billing === "monthly"
-                    ? primary.MarineBlue.main
-                    : neutral.CoolGray.main,
+                    ? primary.marineBlue.main
+                    : neutral.coolGray.main,
               },
             }}
           >
@@ -239,10 +236,10 @@ const SelectPlan: React.FC = () => {
                     padding: 2,
                     "&.Mui-checked": {
                       transform: "translateX(1.5rem)",
-                      color: neutral.Alabaster.main,
+                      color: neutral.alabaster.main,
                       "& + .MuiSwitch-track": {
                         opacity: 1,
-                        backgroundColor: primary.MarineBlue.main,
+                        backgroundColor: primary.marineBlue.main,
                       },
                     },
                   },
@@ -259,7 +256,7 @@ const SelectPlan: React.FC = () => {
                     height: "1.5rem",
                     borderRadius: "10rem",
                     width: "7.5rem",
-                    backgroundColor: primary.MarineBlue.main,
+                    backgroundColor: primary.marineBlue.main,
                     boxSizing: "border-box",
                   },
                 }}
@@ -273,8 +270,8 @@ const SelectPlan: React.FC = () => {
               fontWeight: "700",
               color:
                 billing === "yearly"
-                  ? primary.MarineBlue.main
-                  : neutral.CoolGray.main,
+                  ? primary.marineBlue.main
+                  : neutral.coolGray.main,
             }}
           >
             Yearly

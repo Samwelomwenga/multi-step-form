@@ -18,23 +18,23 @@ import SelectPlan from "../features/selectPlan/SelectPlan";
     
     return (
       <Stack component="main"  direction={{md:"row"}}sx={{bgcolor: {
-        xs: neutral.LightGray.main,
-        md: neutral.White.main,
+        xs: neutral.lightGray.main,
+        md: neutral.white.main,
       },
       pr:{
         md:"5rem"
       },
       minHeight: "100vh",}}>
         <Header/>
-        <Stack component="section" sx={{bgcolor:neutral.White.main,px:"1.5rem",mx:".7rem",borderRadius:"3%", ml: {
+        <Stack component="section" sx={{bgcolor:neutral.white.main,px:"1.5rem",mx:".7rem",borderRadius:"3%", ml: {
             md: "-20rem",
         },mt: { xs: "-3rem", md: "0" },width:{
           md:'100%'
         }}}>
-          <Typography component="h2" variant="h5"  sx={{pt:'1.5rem',color:primary.MarineBlue.main,fontWeight:"700"}}>
+          <Typography component="h2" variant="h5"  sx={{pt:'1.5rem',color:primary.marineBlue.main,fontWeight:"700"}}>
             Select your plan
           </Typography>
-          <Typography component="p" variant="body1" sx={{py:'1rem',color:neutral.CoolGray.main,fontWeight:"400"}}>
+          <Typography component="p" variant="body1" sx={{py:'1rem',color:neutral.coolGray.main,fontWeight:"400"}}>
             You have the option of monthly or yearly billing
           </Typography>
           <SelectPlan/>

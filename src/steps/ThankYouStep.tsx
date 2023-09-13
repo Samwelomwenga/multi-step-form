@@ -1,5 +1,5 @@
 import {Stack,useTheme} from '@mui/material'
-import ThankYou from '../componets/ThankYou'
+import ThankYou from '../components/ThankYou'
 import Header from '../features/header/Header'
 
 

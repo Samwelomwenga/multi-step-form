@@ -60,7 +60,7 @@ const PersonalInfo: React.FC = () => {
       <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
         {inputFields.map((inputField) => (
           <Box key={inputField.label}>
-            <FormLabel sx={{ color: primary.MarineBlue.main }}>
+            <FormLabel sx={{ color: primary.marineBlue.main }}>
               {inputField.label}
             </FormLabel>
             {errors[inputField.InputName]?.message &&<FormHelperText error>This field is required</FormHelperText>}
@@ -75,19 +75,19 @@ const PersonalInfo: React.FC = () => {
               size="small"
               inputProps={{
                 sx: {
-                  color: primary.MarineBlue.main,
+                  color: primary.marineBlue.main,
                 },
               }}
               sx={{
                 mb: { md: 3 },
                 "& .MuiOutlinedInput-root": {
                   "& > fieldset": {
-                    borderColor: neutral.CoolGray.main,
+                    borderColor: neutral.coolGray.main,
                     borderRadius: ".5rem",
                   },
                 },
                 "& .MuiOutlinedInput-root.Mui-focused": {
-                  "& > fieldset": { borderColor: primary.PurplishBlue.main },
+                  "& > fieldset": { borderColor: primary.purplishBlue.main },
                 },
                 "& .MuiOutlinedInput-root:hover": {
                   "& > fieldset": { cursor: "pointer" },

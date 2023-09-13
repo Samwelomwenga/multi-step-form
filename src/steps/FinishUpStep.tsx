@@ -14,8 +14,8 @@ const FinishUpStep: React.FC = () => {
       direction={{ md: "row" }}
       sx={{
         bgcolor: {
-          xs: neutral.LightGray.main,
-          md: neutral.White.main,
+          xs: neutral.lightGray.main,
+          md: neutral.white.main,
         },
         pr:{
           md:"5rem"
@@ -35,7 +35,7 @@ const FinishUpStep: React.FC = () => {
           },
           py: "2rem",
           borderRadius: ".5rem",
-          bgcolor: neutral.White.main,
+          bgcolor: neutral.white.main,
           width: "100%",
         }}
       >
@@ -43,7 +43,7 @@ const FinishUpStep: React.FC = () => {
           component="h2"
           variant="h5"
           sx={{
-            color: primary.MarineBlue.main,
+            color: primary.marineBlue.main,
             fontWeight: "700",
             ml: ".5rem",
           }}
@@ -52,7 +52,7 @@ const FinishUpStep: React.FC = () => {
         </Typography>
         <Typography
           sx={{
-            color: neutral.CoolGray.main,
+            color: neutral.coolGray.main,
             py: "1rem",
             fontWeight: "500",
             ml: ".5rem",

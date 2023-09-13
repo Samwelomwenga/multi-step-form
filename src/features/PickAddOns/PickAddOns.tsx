@@ -76,11 +76,11 @@ const PickAddOns: React.FC = () => {
                   }
                   sx={{
                     border: "1px solid",
-                    borderColor: neutral.LightGray.main,
+                    borderColor: neutral.lightGray.main,
                     p: ".5rem",
                     borderRadius: ".5rem",
                     "&:hover": {
-                      borderColor: primary.PurplishBlue.main,
+                      borderColor: primary.purplishBlue.main,
                     },
                   }}
                   label={
@@ -90,7 +90,7 @@ const PickAddOns: React.FC = () => {
                           component="h3"
                           variant="body1"
                           sx={{
-                            color: primary.MarineBlue.main,
+                            color: primary.marineBlue.main,
                             fontWeight: "700",
                           }}
                         >
@@ -100,7 +100,7 @@ const PickAddOns: React.FC = () => {
                           component="p"
                           variant="body2"
                           sx={{
-                            color: neutral.CoolGray.main,
+                            color: neutral.coolGray.main,
                             fontWeight: "500",
                           }}
                         >
@@ -110,7 +110,7 @@ const PickAddOns: React.FC = () => {
                       <Typography
                         component="p"
                         variant="body2"
-                        sx={{ color: primary.PurplishBlue.main }}
+                        sx={{ color: primary.purplishBlue.main }}
                       >
                         +$ 1/mo
                       </Typography>
@@ -119,9 +119,9 @@ const PickAddOns: React.FC = () => {
                   control={
                     <Checkbox
                       sx={{
-                        color: primary.PurplishBlue.main,
+                        color: primary.purplishBlue.main,
                         "&.Mui-checked": {
-                          color: primary.PurplishBlue.main,
+                          color: primary.purplishBlue.main,
                         },
                       }}
                     />
