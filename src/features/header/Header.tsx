@@ -74,10 +74,10 @@ const Header: React.FC = () => {
             <StepLabel>
               {isMediumScreen ? (
                 <Box component="div" sx={{pl:".5rem"}}>
-                  <Typography component="p" variant="body2" sx={{color:neutral.CoolGray.main}}>
+                  <Typography component="p" variant="body2" sx={{color:neutral.coolGray.main}}>
                     {step.name}
                   </Typography>
-                  <Typography component="p" variant="body2" sx={{color:neutral.White.main}}>
+                  <Typography component="p" variant="body2" sx={{color:neutral.white.main}}>
                     {step.label}
                   </Typography>
                 </Box>

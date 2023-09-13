@@ -22,7 +22,7 @@ function App() {
       <Route path='/?step=3' element={<PickAddOnsStep/>}/>
       <Route path='/?step=4' element={<FinishUpStep/>}/>
     </Routes>
-    {/* <PersonalInfoStep/> */}
+    <PersonalInfoStep/>
     {/* <SelectPlanStep/> */}
     {/* <PickAddOnsStep/> */}
 {/* <FinishUpStep/> */}

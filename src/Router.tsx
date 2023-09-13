@@ -1,6 +1,6 @@
 import {createBrowserRouter,RouterProvider,} from "react-router-dom"
 
-import PersonalInfoStep from "./steps/PersonalInfoStep";
+import App from "./app/App";
 import SelectPlanStep from "./steps/SelectPlanStep";
 import PickAddOnsStep from "./steps/PickAddOnsStep";
 import FinishUpStep from "./steps/FinishUpStep";
@@ -9,11 +9,11 @@ const Router=()=>{
     const BrowserRouter=createBrowserRouter([
         {
           path: "/",
-          element: <PersonalInfoStep />,
+          element: <App />,
           children: [
             {
               path: "step=1", 
-              element: <PersonalInfoStep />,
+              element: <App />,
             },
             {
               path: "step=2", 
