@@ -131,7 +131,7 @@ const PickAddOns: React.FC = () => {
             />
           ))}
         </FormGroup>
-        <Buttons />
+        <Buttons step="step=4" />
       </form>
       <DevTool control={control} />
     </>

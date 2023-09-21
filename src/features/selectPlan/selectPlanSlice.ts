@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {  createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../../app/store";
 
 export type selectPlanState = {
   plan: { name: "arcade" | "advance" | "pro"; price: number };
@@ -6,6 +7,11 @@ export type selectPlanState = {
   switchValue: boolean;
   selectedPlan: string;
 };
+export const selectedBilling = () =>(getstate:()=> RootState)=>{
+return getstate().selectPlan.billing;
+}
+
+
 
 const selectPlanSlice = createSlice({
   name: "selectPlanSlice",
@@ -42,15 +48,14 @@ const selectPlanSlice = createSlice({
         }
       }
 
-      // return { ...state, ...action.payload };
     },
     updateBilling: (state, action: PayloadAction<selectPlanState>) => {
       const { switchValue } = action.payload;
       const billing = switchValue ? "yearly" : "monthly";
       state.billing = billing;
-      // return { ...state, billing };
     },
   },
+
 });
 export const { updatePlan, updateBilling } = selectPlanSlice.actions;
 export default selectPlanSlice.reducer;

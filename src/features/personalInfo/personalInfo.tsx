@@ -97,7 +97,7 @@ const PersonalInfo: React.FC = () => {
           </Box>
         ))}
 
-        <Buttons />
+        <Buttons step="step=2"/>
       </form>
       <DevTool control={control} />
     </>

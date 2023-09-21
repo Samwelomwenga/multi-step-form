@@ -134,6 +134,10 @@ const SelectPlan: React.FC = () => {
                     ml: ".1rem",
                     borderRadius: ".5rem",
                     width: { xs: "100%", md: "auto" },
+                    ":hover": {
+                      borderColor:
+                         primary.purplishBlue.main,
+                    },
                   }}
                   label={
                     <Stack>
@@ -277,7 +281,7 @@ const SelectPlan: React.FC = () => {
             Yearly
           </Typography>
         </Stack>
-        <Buttons />
+        <Buttons step="step=3" />
       </form>
       <DevTool control={control} />
     </>

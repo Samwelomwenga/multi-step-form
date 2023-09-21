@@ -1,17 +1,27 @@
 import { Button, Stack } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
-const NextButton: React.FC = () => {
+interface NextButtonProps {
+  step: string;
+}
+
+const NextButton: React.FC<NextButtonProps> = (props) => {
   const theme = useTheme();
   const primary = theme.palette.Primary;
   const neutral = theme.palette.neutral;
+  const navigate=useNavigate()
+  const handleNextButton = () => {
+      navigate(`/${props.step}`)
+      console.log(props.step)
+  }
 
   return (
     <Button
       type="submit"
       variant="contained"
       size="small"
+      onClick={handleNextButton}
       sx={{
         bgcolor: primary.marineBlue.main,
         color: neutral.magnolia.main,
@@ -28,14 +38,15 @@ const BackButton: React.FC = () => {
   const theme = useTheme();
   const primary = theme.palette.Primary;
   const neutral = theme.palette.neutral;
-  // const navigate=useNavigate()
-  // const handleBackButton = () => {
-  //     navigate(-1)
-  // }
+  const navigate=useNavigate()
+  const handleBackButton = () => {
+      navigate(-1)
+  }
   return (
     <Button
       variant="text"
       size="small"
+      onClick={handleBackButton}
       sx={{
         color: neutral.coolGray.main,
         fontWeight: "700",
@@ -51,7 +62,7 @@ const BackButton: React.FC = () => {
   );
 };
 
-const Buttons: React.FC = () => {
+const Buttons: React.FC<NextButtonProps> = (props) => {
   const theme = useTheme();
   // const primary = theme.palette.Primary;
   const neutral = theme.palette.neutral;
@@ -75,8 +86,8 @@ const Buttons: React.FC = () => {
       md:"0"}
       }}
     >
-      <BackButton />
-      <NextButton />
+      <BackButton  />
+      <NextButton step={props.step}/>
     </Stack>
   );
 };
