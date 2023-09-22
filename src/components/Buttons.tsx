@@ -1,6 +1,10 @@
 import { Button, Stack } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+
 import { useNavigate } from 'react-router-dom'
+
+import { useDispatch } from "react-redux";
+import { nextStep,backStep } from "../features/header/headerSlice";
 
 interface NextButtonProps {
   step: string;
@@ -11,9 +15,12 @@ const NextButton: React.FC<NextButtonProps> = (props) => {
   const primary = theme.palette.Primary;
   const neutral = theme.palette.neutral;
   const navigate=useNavigate()
+
+  const dispatch = useDispatch();
   const handleNextButton = () => {
       navigate(`/${props.step}`)
-      console.log(props.step)
+      dispatch(nextStep())
+      // console.log(props.step)
   }
 
   return (
@@ -38,9 +45,12 @@ const BackButton: React.FC = () => {
   const theme = useTheme();
   const primary = theme.palette.Primary;
   const neutral = theme.palette.neutral;
+  const dispatch = useDispatch();
+
   const navigate=useNavigate()
   const handleBackButton = () => {
       navigate(-1)
+      dispatch(backStep())
   }
   return (
     <Button

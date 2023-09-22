@@ -7,7 +7,9 @@ import {
   Typography,
   useTheme
 } from "@mui/material";
-// import makeStyles from "@mui/material/styles";
+
+import { useSelector} from "react-redux";
+import { RootState } from "../../app/store";
 
 import sidebarDesktop from "../../assets/images/bg-sidebar-desktop.svg";
 import sidebarMobile from "../../assets/images/bg-sidebar-mobile.svg";
@@ -21,10 +23,10 @@ const Header: React.FC = () => {
   const isMediumScreen = useMediaQuery("(min-width:960px)");
 
   const theme=useTheme();
-//   const primary=theme.palette.Primary;
   const neutral=theme.palette.neutral;
 
-  
+  const activeStep = useSelector((state:RootState) => state.header.activeStep);
+  console.log(`active  ${activeStep}`)
   
   const steps: typeStep[] = [
     {
@@ -62,7 +64,7 @@ const Header: React.FC = () => {
       }}
     >
       <Stepper
-        activeStep={0}
+        activeStep={activeStep}
         nonLinear
         connector={null}
         orientation={isMediumScreen ? "vertical" : "horizontal"}
