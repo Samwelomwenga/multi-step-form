@@ -3,8 +3,9 @@ import { useTheme } from "@mui/material/styles";
 
 import { useNavigate } from 'react-router-dom'
 
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { nextStep,backStep } from "../features/header/headerSlice";
+import { RootState } from "../app/store";
 
 interface NextButtonProps {
   step: string;
@@ -41,6 +42,39 @@ const NextButton: React.FC<NextButtonProps> = (props) => {
     </Button>
   );
 };
+const ConfirmButton: React.FC = () => {
+  const theme = useTheme();
+  const primary = theme.palette.Primary;
+  const neutral = theme.palette.neutral;
+  const navigate=useNavigate()
+
+  const dispatch = useDispatch();
+  const handleNextButton = () => {
+      navigate("/")
+      dispatch(nextStep())
+      // console.log(props.step)
+  }
+
+  return (
+    <Button
+      type="submit"
+      variant="contained"
+      size="small"
+      onClick={handleNextButton}
+      sx={{
+        bgcolor: primary.purplishBlue.main,
+        color: neutral.magnolia.main,
+        py: ".4rem",
+        px: ".8rem",
+        ":hover": { bgcolor: primary.purplishBlue.main,opacity:.87 },
+      }}
+    >
+      Confirm
+    </Button>
+  );
+};
+
+
 const BackButton: React.FC = () => {
   const theme = useTheme();
   const primary = theme.palette.Primary;
@@ -76,6 +110,9 @@ const Buttons: React.FC<NextButtonProps> = (props) => {
   const theme = useTheme();
   // const primary = theme.palette.Primary;
   const neutral = theme.palette.neutral;
+  
+  const activeStep = useSelector((state:RootState) => state.header.activeStep);
+
   return (
     <Stack
       sx={{
@@ -97,7 +134,7 @@ const Buttons: React.FC<NextButtonProps> = (props) => {
       }}
     >
       <BackButton  />
-      <NextButton step={props.step}/>
+    { activeStep===3?<ConfirmButton/>: <NextButton step={props.step}/>}
     </Stack>
   );
 };
