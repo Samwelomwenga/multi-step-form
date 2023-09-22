@@ -8,7 +8,7 @@ import PersonalInfoStep from '../steps/PersonalInfoStep'
 import SelectPlanStep from '../steps/SelectPlanStep'
 import PickAddOnsStep from '../steps/PickAddOnsStep'
 import FinishUpStep from '../steps/FinishUpStep'
-// import ThankYouStep from '../steps/ThankYouStep'
+import ThankYouStep from '../steps/ThankYouStep'
 
 function App() {
 
@@ -22,6 +22,7 @@ function App() {
       <Route path='/step=2' element={<SelectPlanStep/>}/>
       <Route path='/step=3' element={<PickAddOnsStep/>}/>
       <Route path='/step=4' element={<FinishUpStep/>}/>
+      <Route path='/thankYou' element={<ThankYouStep/>}/>
     </Routes>
     {/* <PersonalInfoStep/> */}
     {/* <SelectPlanStep/> */}

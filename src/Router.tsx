@@ -4,6 +4,7 @@ import App from "./app/App";
 import SelectPlanStep from "./steps/SelectPlanStep";
 import PickAddOnsStep from "./steps/PickAddOnsStep";
 import FinishUpStep from "./steps/FinishUpStep";
+import ThankYouStep from "./steps/ThankYouStep";
 
 
 const Router=()=>{
@@ -23,6 +24,10 @@ const Router=()=>{
           {
             path: "step=4",
             element: <FinishUpStep />,
+          },
+          {
+            path: "/thankYou",
+            element: <ThankYouStep/>,
           },
         ],
       },

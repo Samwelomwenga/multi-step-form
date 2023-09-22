@@ -48,10 +48,10 @@ const ConfirmButton: React.FC = () => {
   const neutral = theme.palette.neutral;
   const navigate=useNavigate()
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const handleNextButton = () => {
-      navigate("/")
-      dispatch(nextStep())
+      navigate("/thankYou")
+      // dispatch(nextStep())
       // console.log(props.step)
   }
 

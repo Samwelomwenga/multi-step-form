@@ -8,7 +8,8 @@ const ThankYouStep:React.FC = () => {
   const neutral = theme.palette.neutral;
   return (
     <Stack direction={{md:'row'}}  sx={{bgcolor:{
-      xs:neutral.LightGray.main
+      xs:neutral.lightGray.main,
+      md:neutral.white.main
     }, height:"100vh",}}>
         <Header/>
         <ThankYou/>
