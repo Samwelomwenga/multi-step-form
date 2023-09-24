@@ -21,7 +21,7 @@ const NextButton: React.FC<NextButtonProps> = (props) => {
   const handleNextButton = () => {
       navigate(`/${props.step}`)
       dispatch(nextStep())
-      // console.log(props.step)
+      console.log(props.step)
   }
 
   return (
@@ -49,7 +49,7 @@ const ConfirmButton: React.FC = () => {
   const navigate=useNavigate()
 
   // const dispatch = useDispatch();
-  const handleNextButton = () => {
+  const handleConfirmButton = () => {
       navigate("/thankYou")
       // dispatch(nextStep())
       // console.log(props.step)
@@ -60,7 +60,7 @@ const ConfirmButton: React.FC = () => {
       type="submit"
       variant="contained"
       size="small"
-      onClick={handleNextButton}
+      onClick={handleConfirmButton}
       sx={{
         bgcolor: primary.purplishBlue.main,
         color: neutral.magnolia.main,
@@ -80,6 +80,8 @@ const BackButton: React.FC = () => {
   const primary = theme.palette.Primary;
   const neutral = theme.palette.neutral;
   const dispatch = useDispatch();
+  const activeStep = useSelector((state:RootState) => state.header.activeStep);
+
 
   const navigate=useNavigate()
   const handleBackButton = () => {
@@ -92,6 +94,7 @@ const BackButton: React.FC = () => {
       size="small"
       onClick={handleBackButton}
       sx={{
+        visibility:activeStep>0?"visible":"hidden",
         color: neutral.coolGray.main,
         fontWeight: "700",
         py: ".4rem",
