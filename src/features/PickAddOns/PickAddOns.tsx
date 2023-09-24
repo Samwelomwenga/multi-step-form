@@ -15,6 +15,12 @@ import { PickedAddOnsState, addAddOns, removeAddOns } from "./pickAddOnsSlice";
 
 import Buttons from "../../components/Buttons";
 
+type AddOnsState={
+  heading:"Online service"|"Large Storage"|"Customizable profile",
+  content:string,
+  value:"online"|"storage"|"profile"
+}
+
 const PickAddOns: React.FC = () => {
   const theme = useTheme();
   const primary = theme.palette.Primary;
@@ -22,15 +28,15 @@ const PickAddOns: React.FC = () => {
 
   const dispatch = useDispatch();
   const pickedAddOns = useSelector(
-    (state: { pickAddOns: PickedAddOnsState }) => state.pickAddOns
+    (state: { pickAddOns: PickedAddOnsState[] }) => state.pickAddOns
   );
   console.log(pickedAddOns);
 
   const { control } = useForm<PickedAddOnsState>();
 
-  const addOns = [
+  const addOns:AddOnsState[] = [
     {
-      heading: "Online  service",
+      heading:"Online service",
       content: "Access to multiplayer games",
       value: "online",
     },
@@ -75,6 +81,7 @@ const PickAddOns: React.FC = () => {
                     )
                   }
                   sx={{
+                    bgcolor:pickedAddOns.map((addOn) => addOn.name?.toLocaleLowerCase()).includes(addOn.heading.toLocaleLowerCase())?primary.purplishBlue.light:neutral.white.main,
                     border: "1px solid",
                     borderColor: neutral.lightGray.main,
                     p: ".5rem",
@@ -118,6 +125,7 @@ const PickAddOns: React.FC = () => {
                   }
                   control={
                     <Checkbox
+                    checked={pickedAddOns.map((addOn) => addOn.name?.toLocaleLowerCase()).includes(addOn.heading.toLocaleLowerCase())}
                       sx={{
                         color: primary.purplishBlue.main,
                         "&.Mui-checked": {
