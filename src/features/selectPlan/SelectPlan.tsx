@@ -220,6 +220,7 @@ const SelectPlan: React.FC = () => {
             render={({ field }) => (
               <Switch
                 {...field}
+                checked={selectPlan.billing==="yearly"}
                 onChange={(event) => {
                   field.onChange(event.target.checked);
                   handleSelectedBilling(event.target.checked);
