@@ -80,7 +80,7 @@ const Header: React.FC = () => {
                   height: "1.7rem",
                   color:
                     index === activeStep
-                      ? primary.pastleBlue.main
+                      ? primary.lightBlue.main
                       : "transparent",
                   border: activeStep===index?"none":"1.7px solid",
                   borderColor: neutral.lightGray.main,
