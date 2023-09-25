@@ -1,6 +1,7 @@
 import { Stack, Typography, Divider, useTheme } from "@mui/material";
 import Buttons from "../../components/Buttons";
 import { store } from "../../app/store";
+import calculateTotal from "../../utils/functions/calculateTotal";
 const FinishUp: React.FC = () => {
   const theme = useTheme();
   const primary = theme.palette.Primary;
@@ -13,7 +14,9 @@ const FinishUp: React.FC = () => {
       plan: { name, price },
     },
   } = store.getState();
-  console.log(billing, "\n", price, "\n", name, "\n", pickAddOns);
+  const isMonthly = billing === "monthly";
+  const totalPrice=calculateTotal(price, pickAddOns);
+  // console.log(billing, "\n", price, "\n", name, "\n", pickAddOns);
   return (
     <>
       <Stack
@@ -47,14 +50,14 @@ const FinishUp: React.FC = () => {
             variant="body1"
             sx={{ color: primary.marineBlue.main, fontWeight: "700" }}
           >
-            ${price}/{billing === "monthly" ? "mo" : "yr"}
+            ${price}/{isMonthly? "mo" : "yr"}
           </Typography>
         </Stack>
         <Divider />
 
         {pickAddOns.length !== 0 &&
           pickAddOns.map((pickAddOn) => (
-            <Stack direction="row" sx={{ gap: "7rem" }}>
+            <Stack key={pickAddOn.name} direction="row" sx={{ gap: "7rem" }}>
               <Typography
             component="p"
             variant="body1"
@@ -67,21 +70,12 @@ const FinishUp: React.FC = () => {
                 variant="body1"
                 sx={{ color: primary.marineBlue.main, fontWeight: "400" }}
               >
-                +${pickAddOn.price}/{billing==="monthly"?"mon":"yr"}
+                +${pickAddOn.price}/{isMonthly?"mon":"yr"}
               </Typography>
             </Stack>
           ))}
 
-        {/* <Stack direction="row" sx={{ gap: "7.5rem" }}>
-          
-          <Typography
-            component="p"
-            variant="body1"
-            sx={{ color: primary.marineBlue.main, fontWeight: "400" }}
-          >
-            +$20/yr
-          </Typography>
-        </Stack> */}
+        
       </Stack>
       <Stack direction="row" sx={{ gap: "7rem", pt: "1rem", mx: "1.7rem" }}>
         <Typography
@@ -89,14 +83,14 @@ const FinishUp: React.FC = () => {
           variant="body1"
           sx={{ color: neutral.coolGray.main, fontWeight: "500" }}
         >
-          Total(per year)
+          Total(per {isMonthly?"month":"year"})
         </Typography>
         <Typography
           component="p"
           variant="body1"
           sx={{ color: primary.purplishBlue.main, fontWeight: "700" }}
         >
-          $120/yr
+          ${totalPrice}/{isMonthly?"mon":"yr"}
         </Typography>
       </Stack>
       <Buttons step="step=1"/>
