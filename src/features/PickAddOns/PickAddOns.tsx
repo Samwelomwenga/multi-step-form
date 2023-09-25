@@ -5,6 +5,7 @@ import {
   FormControlLabel,
   Checkbox,
   useTheme,
+  Box,
 } from "@mui/material";
 
 import { useForm, Controller } from "react-hook-form";
@@ -14,11 +15,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { PickedAddOnsState, addAddOns, removeAddOns } from "./pickAddOnsSlice";
 
 import Buttons from "../../components/Buttons";
+import { store } from "../../app/store";
 
 type AddOnsState={
   heading:"Online service"|"Large Storage"|"Customizable profile",
   content:string,
   value:"online"|"storage"|"profile"
+  price:{
+    monthly:number,
+    yearly:number
+  }
 }
 
 const PickAddOns: React.FC = () => {
@@ -30,6 +36,7 @@ const PickAddOns: React.FC = () => {
   const pickedAddOns = useSelector(
     (state: { pickAddOns: PickedAddOnsState[] }) => state.pickAddOns
   );
+  const {selectPlan:{billing}}=store.getState();
   console.log(pickedAddOns);
 
   const { control } = useForm<PickedAddOnsState>();
@@ -39,16 +46,31 @@ const PickAddOns: React.FC = () => {
       heading:"Online service",
       content: "Access to multiplayer games",
       value: "online",
+      price:{
+        monthly:1,
+        yearly:10,
+      
+      },
     },
     {
       heading: "Large Storage",
       content: "Extra 1TB of cloud save",
       value: "storage",
+      price:{
+        monthly:2,
+        yearly:20,
+      
+      },
     },
     {
       heading: "Customizable profile",
       content: "Custom theme on your profile",
       value: "profile",
+      price:{
+        monthly:2,
+        yearly:20,
+      
+      },
     },
   ];
 
@@ -91,7 +113,7 @@ const PickAddOns: React.FC = () => {
                     },
                   }}
                   label={
-                    <Stack direction="row">
+                    <Stack  sx={{justifyContent:"space-between",flexDirection:"row"}}>
                       <Stack>
                         <Typography
                           component="h3"
@@ -114,13 +136,15 @@ const PickAddOns: React.FC = () => {
                           {addOn.content}
                         </Typography>
                       </Stack>
+                      <Box sx={{ml:{xs:"0rem",md:"28rem"}}}>
                       <Typography
                         component="p"
                         variant="body2"
-                        sx={{ color: primary.purplishBlue.main }}
+                        sx={{ color: primary.purplishBlue.main,whiteSpace:"nowrap"}}
                       >
-                        +$ 1/mo
+                        +$ {addOn.price[billing]}/{billing==="monthly"?"mo":"yr"}
                       </Typography>
+                      </Box>
                     </Stack>
                   }
                   control={
