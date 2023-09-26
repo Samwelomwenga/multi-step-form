@@ -18,7 +18,8 @@ const NextButton: React.FC<NextButtonProps> = (props) => {
   const navigate=useNavigate()
 
   const dispatch = useDispatch();
-  const handleNextButton = () => {
+  const handleNextButton = (event:React.FormEvent) => {
+    event.preventDefault();
       navigate(`/${props.step}`)
       dispatch(nextStep())
       console.log(props.step)
@@ -49,7 +50,9 @@ const ConfirmButton: React.FC = () => {
   const navigate=useNavigate()
 
   // const dispatch = useDispatch();
-  const handleConfirmButton = () => {
+  const handleConfirmButton = (event:React.FormEvent) => {
+    event.preventDefault();
+
       navigate("/thankYou")
       // dispatch(nextStep())
       // console.log(props.step)
@@ -84,7 +87,9 @@ const BackButton: React.FC = () => {
 
 
   const navigate=useNavigate()
-  const handleBackButton = () => {
+  const handleBackButton = (event:React.FormEvent) => {
+    event.preventDefault();
+
       navigate(-1)
       dispatch(backStep())
   }
