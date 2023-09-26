@@ -14,6 +14,7 @@ const personalInfoSlice = createSlice({
   } as personalInfoState,
   reducers: {
     updatePersonalInfo: (state, action:PayloadAction<personalInfoState>) => {
+      console.log(action.payload)
       return {...state,...action.payload}
     },
   },
