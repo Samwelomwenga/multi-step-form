@@ -17,9 +17,12 @@ const ThankYou: React.FC = () => {
         placeItems: "center",
         textAlign: "center",
         mx: "1rem",
-        py: "2rem",
-        px: "1rem",
-        mt: { xs: "-3rem", md: "0", backgroundColor: neutral.white.main },
+        py: {xs:"2rem",md:"8rem"},
+        mt: { xs: "-3rem", md: "0" },
+        backgroundColor: neutral.white.main,
+        ml:{md:"-10rem"},
+        boxShadow:{md:"none"},
+        px:{xs:"1rem",md:"15rem"}
       }}
     >
       <Stack sx={{ mt: "2rem" }}>
