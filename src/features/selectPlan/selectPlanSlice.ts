@@ -53,6 +53,19 @@ const selectPlanSlice = createSlice({
       const { switchValue } = action.payload;
       const billing = switchValue ? "yearly" : "monthly";
       state.billing = billing;
+      switch (state.plan.name) {
+        case "arcade":
+          state.plan.price = billing === "yearly" ? 90 : 9;
+          break;
+        case "advance":
+          state.plan.price = billing === "yearly" ? 120 : 12;
+          break;
+        case "pro":
+          state.plan.price = billing === "yearly" ? 150 : 15;
+          break;
+        default:
+          break;
+      }
     },
   },
 
