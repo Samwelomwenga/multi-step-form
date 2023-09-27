@@ -12,6 +12,9 @@ import {
 import { useForm, Controller } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 
+import { useNavigate } from "react-router-dom";
+
+
 import { useSelector, useDispatch } from "react-redux";
 import { selectPlanState, updateBilling, updatePlan } from "./selectPlanSlice";
 
@@ -20,6 +23,7 @@ import { ReactComponent as AdvanceIcon } from "../../assets/images/icon-advanced
 import { ReactComponent as ProIcon } from "../../assets/images/icon-pro.svg";
 
 import Buttons from "../../components/Buttons";
+import { nextStep } from "../header/headerSlice";
 
 interface plansInterface {
   name: "Arcade" | "Advance" | "Pro";
@@ -32,6 +36,9 @@ const SelectPlan: React.FC = () => {
   const primary = theme.palette.Primary;
   const neutral = theme.palette.neutral;
   const isMediumScreen = useMediaQuery("(min-width:960px)");
+
+  const navigate = useNavigate();
+
 
   const selectPlan = useSelector(
     (state: { selectPlan: selectPlanState }) => state.selectPlan
@@ -62,13 +69,17 @@ const SelectPlan: React.FC = () => {
 
     dispatch(updatePlan(selectedPlanState));
   };
+  const onSubmit = () => {
+    dispatch(nextStep());
+    navigate("/step=3");
+  };
 
   const {
     billing,
     plan: { name },
   } = selectPlan;
 
-  const { control } = useForm<selectPlanState>({ defaultValues: selectPlan });
+  const { control,handleSubmit} = useForm<selectPlanState>({ defaultValues: selectPlan });
 
   const plans: plansInterface[] = [
     {
@@ -92,7 +103,7 @@ const SelectPlan: React.FC = () => {
   ];
   return (
     <>
-      <form noValidate autoComplete="off">
+      <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name="plan"
           control={control}
@@ -282,7 +293,7 @@ const SelectPlan: React.FC = () => {
             Yearly
           </Typography>
         </Stack>
-        <Buttons step="step=3" />
+        <Buttons/>
       </form>
       <DevTool control={control} />
     </>
