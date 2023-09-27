@@ -11,11 +11,14 @@ import {
 import { useForm, Controller } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 
+import { useNavigate } from "react-router-dom";
+
 import { useSelector, useDispatch } from "react-redux";
 import { PickedAddOnsState, addAddOns, removeAddOns } from "./pickAddOnsSlice";
 
 import Buttons from "../../components/Buttons";
 import { store } from "../../app/store";
+import { nextStep } from "../header/headerSlice";
 
 type AddOnsState={
   heading:"Online service"|"Large Storage"|"Customizable profile",
@@ -32,6 +35,8 @@ const PickAddOns: React.FC = () => {
   const primary = theme.palette.Primary;
   const neutral = theme.palette.neutral;
 
+  const navigate=useNavigate();
+
   const dispatch = useDispatch();
   const pickedAddOns = useSelector(
     (state: { pickAddOns: PickedAddOnsState[] }) => state.pickAddOns
@@ -39,7 +44,12 @@ const PickAddOns: React.FC = () => {
   const {selectPlan:{billing}}=store.getState();
   console.log(pickedAddOns);
 
-  const { control } = useForm<PickedAddOnsState>();
+  const { control,handleSubmit } = useForm<PickedAddOnsState>();
+  const onSubmit = () => {
+    dispatch(nextStep());
+    navigate("/step=4");
+  };
+
 
   const addOns:AddOnsState[] = [
     {
@@ -85,7 +95,7 @@ const PickAddOns: React.FC = () => {
 
   return (
     <>
-      <form autoComplete="off" noValidate>
+      <form autoComplete="off" noValidate onSubmit={handleSubmit(onSubmit)}>
         <FormGroup sx={{ gap: "1rem" }}>
           {addOns.map((addOn) => (
             <Controller
@@ -163,7 +173,7 @@ const PickAddOns: React.FC = () => {
             />
           ))}
         </FormGroup>
-        <Buttons step="step=4" />
+        <Buttons/>
       </form>
       <DevTool control={control} />
     </>
