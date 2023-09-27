@@ -1,14 +1,23 @@
-import { TextField, Box, FormLabel, useTheme,FormHelperText } from "@mui/material";
+import {
+  TextField,
+  Box,
+  FormLabel,
+  useTheme,
+  FormHelperText,
+} from "@mui/material";
 
-import { useForm} from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
-import {z} from "zod"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
+import { useNavigate } from "react-router-dom";
+
+import { nextStep } from "../header/headerSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { personalInfoState, updatePersonalInfo } from "./personalInfoSlice";
 
 import Buttons from "../../components/Buttons";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 type inputFieldsType = {
   label: "Name" | "Email Address" | "Phone Number";
@@ -22,22 +31,38 @@ const PersonalInfo: React.FC = () => {
   const primary = theme.palette.Primary;
   const neutral = theme.palette.neutral;
 
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
+
   const personalInfo = useSelector(
     (state: { personalInfo: personalInfoState }) => state.personalInfo
   );
   const personalInfoSchema = z.object({
     name: z.string().nonempty({ message: "Name is required" }),
-    email: z.string().email({ message: "Invalid email address" }).nonempty({ message: "Email is required" }),
-    phone: z.string().min(10, { message: "Invalid phone number" }).nonempty({ message: "Phone number is required" }),
+    email: z
+      .string()
+      .email({ message: "Invalid email address" })
+      .nonempty({ message: "Email is required" }),
+    phone: z
+      .string()
+      .min(10, { message: "Invalid phone number" })
+      .nonempty({ message: "Phone number is required" }),
   });
 
-  const { register, handleSubmit, control,formState:{errors}} = useForm<personalInfoState>(
-    { defaultValues: personalInfo,resolver:zodResolver(personalInfoSchema)}
-  );
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<personalInfoState>({
+    defaultValues: personalInfo,
+    resolver: zodResolver(personalInfoSchema),
+  });
   const onSubmit = (data: personalInfoState) => {
-    console.log("form data",data)
     dispatch(updatePersonalInfo(data));
+    dispatch(nextStep());
+    navigate("/step=2");
   };
 
   const inputFields: inputFieldsType[] = [
@@ -60,22 +85,21 @@ const PersonalInfo: React.FC = () => {
       type: "tel",
     },
   ];
-  // const watchValue = watch();
-  // console.log(watchValue);
 
   return (
     <>
-      <form  autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
+      <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
         {inputFields.map((inputField) => (
           <Box key={inputField.label}>
             <FormLabel sx={{ color: primary.marineBlue.main }}>
               {inputField.label}
             </FormLabel>
-            <FormHelperText>{errors[inputField.InputName]?.message}</FormHelperText>
+            <FormHelperText>
+              {errors[inputField.InputName]?.message}
+            </FormHelperText>
             <TextField
               type={inputField.type}
               {...register(inputField.InputName)}
-              
               // error
               margin="dense"
               placeholder={inputField.placeholder}
@@ -105,7 +129,7 @@ const PersonalInfo: React.FC = () => {
           </Box>
         ))}
 
-        <Buttons step="step=2"/>
+        <Buttons />
       </form>
       <DevTool control={control} />
     </>
