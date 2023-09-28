@@ -27,7 +27,6 @@ const Header: React.FC = () => {
   const primary = theme.palette.Primary;
 
   const activeStep = useSelector((state: RootState) => state.header.activeStep);
-  console.log(`active  ${activeStep}`);
 
   const steps: typeStep[] = [
     {
@@ -71,28 +70,32 @@ const Header: React.FC = () => {
         orientation={isMediumScreen ? "vertical" : "horizontal"}
         sx={{ gap: { md: ".7rem" }, ml: { xs: "4rem", md: ".3rem" } }}
       >
-        {steps.map((step, index) => (
+        {steps.map((step) => (
           <Step key={step.name} sx={{ justifyContent: "center" }}>
             <StepLabel
               sx={{
                 "& .MuiSvgIcon-root": {
                   width: "1.7rem",
                   height: "1.7rem",
-                  color:
-                    index === activeStep
-                      ? primary.lightBlue.main
-                      : "transparent",
-                  border: activeStep===index?"none":"1.7px solid",
+                  color: "transparent",
+                  border: "1.7px solid",
                   borderColor: neutral.lightGray.main,
                   borderRadius: "50%",
                 },
                 "& .MuiStepIcon-text": {
-                  fill:
-                    activeStep === index
-                      ? primary.marineBlue.main
-                      : neutral.white.main,
-                      fontWeight:500,
+                  fill: neutral.white.main,
+                  fontWeight: 500,
                 },
+                " & .Mui-active": { 
+                  "& .MuiSvgIcon-root": {
+                    color: primary.lightBlue.main,
+                    border:"none",
+                  },
+                  "& .MuiStepIcon-text": {
+                    fill: primary.marineBlue.main,
+                  },
+                  
+                 },
               }}
             >
               {isMediumScreen ? (
