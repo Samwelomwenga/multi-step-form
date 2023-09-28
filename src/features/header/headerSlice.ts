@@ -16,9 +16,13 @@ const headerSlice=createSlice(
            state.activeStep=state.activeStep-1;
 
         },
+        changeStep:(state)=>{
+           state.activeStep=1;
+
+        },
 
     }
 }
 )
-export const {nextStep,backStep}=headerSlice.actions;
+export const {nextStep,backStep,changeStep}=headerSlice.actions;
 export default headerSlice.reducer;
