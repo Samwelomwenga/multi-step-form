@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   TextField,
   Box,
@@ -27,6 +28,7 @@ type inputFieldsType = {
 };
 
 const PersonalInfo: React.FC = () => {
+  const [isFocused, setIsFocused] = useState(false);
   const theme = useTheme();
   const primary = theme.palette.Primary;
   const neutral = theme.palette.neutral;
@@ -91,20 +93,25 @@ const PersonalInfo: React.FC = () => {
       <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
         {inputFields.map((inputField) => (
           <Box key={inputField.label}>
-            <FormLabel sx={{ color: primary.marineBlue.main }}>
-              {inputField.label}
-            </FormLabel>
-            <FormHelperText>
-              {errors[inputField.InputName]?.message}
-            </FormHelperText>
+            <Box sx={{display:"flex",flexDirection:"row",justifyContent:"space-between"}}>
+              {" "}
+              <FormLabel sx={{ color: primary.marineBlue.main }}>
+                {inputField.label}
+              </FormLabel>
+              <FormHelperText sx={{ color: primary.strawberryRed.main,fontWeight:"700" }}>
+                {errors[inputField.InputName]?.message}
+              </FormHelperText>
+            </Box>
+
             <TextField
               type={inputField.type}
               {...register(inputField.InputName)}
-              // error
               margin="dense"
               placeholder={inputField.placeholder}
               fullWidth
               size="small"
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
               inputProps={{
                 sx: {
                   color: primary.marineBlue.main,
@@ -114,7 +121,9 @@ const PersonalInfo: React.FC = () => {
                 mb: { md: 3 },
                 "& .MuiOutlinedInput-root": {
                   "& > fieldset": {
-                    borderColor: neutral.coolGray.main,
+                    borderColor: !errors[inputField.InputName]
+                      ? neutral.coolGray.main
+                      : primary.strawberryRed.main,
                     borderRadius: ".5rem",
                   },
                 },
