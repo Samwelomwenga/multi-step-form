@@ -1,4 +1,4 @@
-import {  createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {  createSlice, PayloadAction,createAsyncThunk} from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 
 export type selectPlanState = {
@@ -7,9 +7,16 @@ export type selectPlanState = {
   switchValue: boolean;
   selectedPlan: string;
 };
-export const selectedBilling = () =>(getstate:()=> RootState)=>{
-return getstate().selectPlan.billing;
-}
+
+export const passBillingValue = createAsyncThunk(
+  'billing/passBillingValue',
+  async (_, thunkAPI) => {
+    const billingValue = (thunkAPI.getState() as RootState).selectPlan.billing;
+    return billingValue;
+  }
+ );
+
+
 
 
 
