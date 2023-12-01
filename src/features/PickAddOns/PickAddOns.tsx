@@ -41,6 +41,7 @@ const PickAddOns: React.FC = () => {
   const pickedAddOns = useSelector(
     (state: { pickAddOns: PickedAddOnsState[] }) => state.pickAddOns
   );
+  console.log(pickedAddOns)
   const {selectPlan:{billing}}=store.getState();
 
   const { control,handleSubmit } = useForm<PickedAddOnsState>();
