@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { selectPlanState, updateBilling } from "../selectPlan/selectPlanSlice";
 
-// import { passBillingValue } from "../selectPlan/selectPlanSlice";
 export type PickedAddOnsState = {
   name: "online service" | "large storage" | "customizable profile" | null;
   price: number | null;
@@ -57,17 +56,21 @@ const pickAddOnsSlice = createSlice({
       const addOns = action.payload;
       switch (addOns) {
         case "online": {
-         state.pickAddOns= state.pickAddOns.filter((state) => state.name !== "online service");
+          state.pickAddOns = state.pickAddOns.filter(
+            (state) => state.name !== "online service"
+          );
           break;
         }
         case "profile": {
-          state.pickAddOns=state.pickAddOns.filter(
+          state.pickAddOns = state.pickAddOns.filter(
             (state) => state.name !== "customizable profile"
           );
           break;
         }
         case "storage": {
-          state.pickAddOns=state.pickAddOns.filter((state) => state.name !== "large storage");
+          state.pickAddOns = state.pickAddOns.filter(
+            (state) => state.name !== "large storage"
+          );
           break;
         }
 

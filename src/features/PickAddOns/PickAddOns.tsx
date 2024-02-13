@@ -41,9 +41,7 @@ const PickAddOns = () => {
   const pickedAddOns = useSelector(
     (state: RootState) => state.pickAddOns.pickAddOns
   );
-  // const pickedAddOns = useSelector(
-  //   (state: { pickAddOns: PickedAddOnsState[] }) => state.pickAddOns
-  // );
+
   console.log(pickedAddOns);
   const {
     selectPlan: { billing },
@@ -90,7 +88,6 @@ const PickAddOns = () => {
     value: string
   ) => {
     const { checked } = event.target;
-    console.log("checked", checked, "value", value);
 
     if (checked) {
       dispatch(addAddOns(value));
