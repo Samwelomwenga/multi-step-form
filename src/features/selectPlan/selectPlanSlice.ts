@@ -1,5 +1,5 @@
-import {  createSlice, PayloadAction,createAsyncThunk} from "@reduxjs/toolkit";
-import { RootState } from "../../app/store";
+import {  createSlice, PayloadAction} from "@reduxjs/toolkit";
+// import { RootState } from "../../app/store";
 
 export type selectPlanState = {
   plan: { name: "arcade" | "advance" | "pro"; price: number };
@@ -8,13 +8,13 @@ export type selectPlanState = {
   selectedPlan: string;
 };
 
-export const passBillingValue = createAsyncThunk(
-  'billing/passBillingValue',
-  async (_, thunkAPI) => {
-    const billingValue = (thunkAPI.getState() as RootState).selectPlan.billing;
-    return billingValue;
-  }
- );
+// export const passBillingValue = createAsyncThunk(
+//   'billing/passBillingValue',
+//   async (_, thunkAPI) => {
+//     const billingValue = (thunkAPI.getState() as RootState).selectPlan.billing;
+//     return billingValue;
+//   }
+//  );
 
 
 

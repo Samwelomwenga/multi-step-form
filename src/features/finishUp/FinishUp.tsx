@@ -17,7 +17,7 @@ const FinishUp: React.FC = () => {
   const neutral = theme.palette.neutral;
 
   const {
-    pickAddOns,
+    pickAddOns:{pickAddOns},
     selectPlan: {
       billing,
       plan: { name, price },

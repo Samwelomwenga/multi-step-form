@@ -17,69 +17,70 @@ import { useSelector, useDispatch } from "react-redux";
 import { PickedAddOnsState, addAddOns, removeAddOns } from "./pickAddOnsSlice";
 
 import Buttons from "../../components/Buttons";
-import { store } from "../../app/store";
+import { RootState, store } from "../../app/store";
 import { nextStep } from "../header/headerSlice";
 
-type AddOnsState={
-  heading:"Online service"|"Large Storage"|"Customizable profile",
-  content:string,
-  value:"online"|"storage"|"profile"
-  price:{
-    monthly:number,
-    yearly:number
-  }
-}
+type AddOnsState = {
+  heading: "Online service" | "Large Storage" | "Customizable profile";
+  content: string;
+  value: "online" | "storage" | "profile";
+  price: {
+    monthly: number;
+    yearly: number;
+  };
+};
 
-const PickAddOns: React.FC = () => {
+const PickAddOns = () => {
   const theme = useTheme();
   const primary = theme.palette.Primary;
   const neutral = theme.palette.neutral;
 
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const pickedAddOns = useSelector(
-    (state: { pickAddOns: PickedAddOnsState[] }) => state.pickAddOns
+    (state: RootState) => state.pickAddOns.pickAddOns
   );
-  console.log(pickedAddOns)
-  const {selectPlan:{billing}}=store.getState();
+  // const pickedAddOns = useSelector(
+  //   (state: { pickAddOns: PickedAddOnsState[] }) => state.pickAddOns
+  // );
+  console.log(pickedAddOns);
+  const {
+    selectPlan: { billing },
+  } = store.getState();
 
-  const { control,handleSubmit } = useForm<PickedAddOnsState>();
+  const { control, handleSubmit } = useForm<PickedAddOnsState>();
   const onSubmit = () => {
     dispatch(nextStep());
     navigate("/step=4");
   };
 
-
-  const addOns:AddOnsState[] = [
+  const addOns: AddOnsState[] = [
     {
-      heading:"Online service",
+      heading: "Online service",
       content: "Access to multiplayer games",
       value: "online",
-      price:{
-        monthly:1,
-        yearly:10,
-      
+      price: {
+        monthly: 1,
+        yearly: 10,
       },
     },
     {
       heading: "Large Storage",
       content: "Extra 1TB of cloud save",
       value: "storage",
-      price:{
-        monthly:2,
-        yearly:20,
-      
+      price: {
+        monthly: 2,
+        yearly: 20,
       },
     },
     {
       heading: "Customizable profile",
       content: "Custom theme on your profile",
       value: "profile",
-      price:{
-        monthly:2,
-        yearly:20,
-      
+      price: {
+        monthly: 2,
+        yearly: 20,
       },
     },
   ];
@@ -89,8 +90,13 @@ const PickAddOns: React.FC = () => {
     value: string
   ) => {
     const { checked } = event.target;
+    console.log("checked", checked, "value", value);
 
-    !checked ? dispatch(removeAddOns(value)) : dispatch(addAddOns(value));
+    if (checked) {
+      dispatch(addAddOns(value));
+    } else {
+      dispatch(removeAddOns(value));
+    }
   };
 
   return (
@@ -113,7 +119,13 @@ const PickAddOns: React.FC = () => {
                     )
                   }
                   sx={{
-                    bgcolor:pickedAddOns.map((addOn) => addOn.name?.toLocaleLowerCase()).includes(addOn.heading.toLocaleLowerCase())?primary.purplishBlue.light:neutral.white.main,
+                    bgcolor: pickedAddOns.some(
+                      (addedAddOn) =>
+                        addedAddOn.name?.toLocaleLowerCase() ===
+                        addOn.heading.toLocaleLowerCase()
+                    )
+                      ? primary.purplishBlue.light
+                      : neutral.white.main,
                     border: "1px solid",
                     borderColor: neutral.lightGray.main,
                     p: ".5rem",
@@ -123,7 +135,12 @@ const PickAddOns: React.FC = () => {
                     },
                   }}
                   label={
-                    <Stack  sx={{justifyContent:"space-between",flexDirection:"row"}}>
+                    <Stack
+                      sx={{
+                        justifyContent: "space-between",
+                        flexDirection: "row",
+                      }}
+                    >
                       <Stack>
                         <Typography
                           component="h3"
@@ -146,20 +163,30 @@ const PickAddOns: React.FC = () => {
                           {addOn.content}
                         </Typography>
                       </Stack>
-                      <Box sx={{ml:{xs:"0rem",md:"28rem"}}}>
-                      <Typography
-                        component="p"
-                        variant="body2"
-                        sx={{ color: primary.purplishBlue.main,whiteSpace:"nowrap"}}
-                      >
-                        +$ {addOn.price[billing]}/{billing==="monthly"?"mo":"yr"}
-                      </Typography>
+                      <Box sx={{ ml: { xs: "0rem", md: "28rem" } }}>
+                        <Typography
+                          component="p"
+                          variant="body2"
+                          sx={{
+                            color: primary.purplishBlue.main,
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          +$ {addOn.price[billing]}/
+                          {billing === "monthly" ? "mo" : "yr"}
+                        </Typography>
                       </Box>
                     </Stack>
                   }
                   control={
                     <Checkbox
-                    checked={pickedAddOns.map((addOn) => addOn.name?.toLocaleLowerCase()).includes(addOn.heading.toLocaleLowerCase())}
+                      checked={pickedAddOns.some(
+                        (addedAddOn) =>
+                          addedAddOn.name?.toLocaleLowerCase() ===
+                          addOn.heading.toLocaleLowerCase()
+                      )}
+                      // .map((addOn) => addOn.name?.toLocaleLowerCase())
+                      // .includes(addOn.heading.toLocaleLowerCase())}
                       sx={{
                         color: primary.purplishBlue.main,
                         "&.Mui-checked": {
@@ -173,7 +200,7 @@ const PickAddOns: React.FC = () => {
             />
           ))}
         </FormGroup>
-        <Buttons/>
+        <Buttons />
       </form>
       <DevTool control={control} />
     </>
